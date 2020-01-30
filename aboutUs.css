@@ -1,0 +1,36 @@
+.superAboutUs{
+    font-size:16px;
+    margin: 0px;
+    padding: 0px;
+    border-left: 1.5px solid;
+    width: 100%;
+    min-height: 100vh;
+    display: inline-block;
+    vertical-align:top;
+    margin-right: 15%;
+    box-shadow: 0 0 20px #000;
+    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-position: 0 50%;
+
+}
+
+.aboutUs{
+    font-size:16px;
+    margin: 0px;
+    padding: 0px;
+    border-left: 1.5px solid;
+    width: 80%;
+    height:80%;
+    margin-left:10%;
+    display: inline-block;
+    vertical-align:top;
+    margin-right: 15%;
+    margin-top:7%;
+    box-shadow: 0 0 20px #000;
+    /* position: absolute; */
+    overflow-y: scroll;
+    overflow-x:hidden;
+    background:whitesmoke;
+    
+}
+.aboutUs::-webkit-scrollbar{width: 0 !important }
