@@ -20,7 +20,7 @@ ob_start();
     
     if ($login)
     {
-        $query = "SELECT user.user_name FROM webprojectdatabase.user WHERE user.user_id =".$account->getId();
+        $query = "SELECT user.user_type,user.user_name FROM webprojectdatabase.user WHERE user.user_id =".$account->getId();
         
         try {
             $res = $pdo->prepare($query);
@@ -28,8 +28,16 @@ ob_start();
         }catch (PDOException $e){
             throw new Exception('Database query error');
         } 
-        $user = $res->fetch()['user_name'];
-        echo "<script>window.location.href='user_profile.php?user=$user';</script>";
+        $row = $res->fetch();
+        $user = $row['user_name'];
+        $type = $row['user_type'];
+        if($type=="admin"){
+            echo "<script>window.location.href='admin.php?user=$user&type=$type';</script>";
+        }
+        if($type=="user"){
+            echo "<script>window.location.href='user_profile.php?user=$user&type=$type';</script>";
+        }
+        
         die();
     }
     else
@@ -37,4 +45,4 @@ ob_start();
         echo "<script>window.location.href='user_auth.php';</script>";
         die();
     }
-                
+?>
