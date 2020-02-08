@@ -4,16 +4,16 @@
 $host = 'localhost';
 
 /* MySQL account username */
-$user = 'root';
+$user = 'nicolasmelanie';
 
 /* MySQL account password */
-$passwd = 'thisisapassword';
+$passwd = '1234';
 
 /* The schema you want to use */
 $schema = 'webprojectdatabase';
 
 /* The PDO object */
-$pdo = NULL;
+global $pdo;
 
 /* Connection string, or "data source name" */
 $dsn = 'mysql:host=' . $host . ';dbname=' . $schema;
