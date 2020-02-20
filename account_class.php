@@ -29,6 +29,7 @@ class Account{
         }
         
         if (!is_null($this->getIdFromName($name))){
+            
             throw new Exception('User name not available');
         }
         
@@ -139,6 +140,46 @@ class Account{
         }
     }
 
+    public function adminLogin(string $name, string $passwd): bool{
+        global $pdo;	
+        
+        $name = trim($name);
+        $passwd = trim($passwd);
+        
+        if (!$this->isNameValid($name)){
+            return FALSE;
+        }
+        
+        if (!$this->isPasswdValid($passwd)){
+            return FALSE;
+        }
+        
+        $query = 'SELECT * FROM webprojectdatabase.admin WHERE (admin_name = :name)';
+        
+        $values = array(':name' => $name);
+        
+        try{
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }catch (PDOException $e){
+            throw new Exception('Database query error');
+        }
+        
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+        
+        if (is_array($row) && password_verify($passwd, $row['admin_password'])){
+            $this->id = intval($row['admin_id'], 10);
+            $this->name = $name;
+            $this->authenticated = TRUE;
+            
+            $this->registerLogin();
+            
+            return TRUE;
+        }
+        
+        return FALSE;
+    }
+
     public function login(string $name, string $passwd): bool{
         global $pdo;	
         
@@ -193,6 +234,34 @@ class Account{
                 throw new Exception('Database query error');
             }
         }
+    }
+
+    public function adminsessionLogin(): bool{
+        global $pdo;
+        
+        if (session_status() == PHP_SESSION_ACTIVE){
+            $query = 'SELECT * FROM webprojectdatabase.account_sessions, webprojectdatabase.admin WHERE (account_sessions.session_id = :sid) AND (account_sessions.login_time >= (NOW() - INTERVAL 7 DAY)) AND (account_sessions.account_id = admin.admin_id)';
+            
+            $values = array(':sid' => session_id());
+            
+            try{
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+            }catch (PDOException $e){
+                throw new Exception('Database query error');
+            }
+            
+            $row = $res->fetch(PDO::FETCH_ASSOC);
+            
+            if (is_array($row)){
+                $this->id = intval($row['account_id'], 10);
+                $this->name = $row['admin_name'];
+                $this->authenticated = TRUE;
+                
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
     public function sessionLogin(): bool{
