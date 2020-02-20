@@ -17,20 +17,17 @@
 var user_id = <?php echo $account->getId(); ?>
 
 $(document).ready(function(){
-    $("button.reportContent").click(function(){
+    $("div .articleDisplayed").click(function(){
         var content_id = $(this).attr('id');
         $.ajax({
             url:"admindelete.php",
             data:{content_id: content_id,user_id: user_id},
             cache: false,
-            method: "POST",
-            success: function(result){
-                $("div#abcd").html(result);
-                $(".articleDisplayed #"+content_id).fadeout(2000);//specific content not fading out
-            }
+            method: "POST"
         })
-
+         $(this).fadeOut(2000);
     });
+
 });
 
 </script>
@@ -67,7 +64,7 @@ $(document).ready(function(){
                             echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:200px; overflow:scroll" class="articleDisplayed" id="'.$row['content_id'].'" >';
                             echo '<table>';
                             echo '<tr>';
-                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='article.php?content_id=".$row['content_id']."'>".$row['title']."</a>" .$row['content_id'].'<button class="reportContent" type="button" id="'.$row['content_id'].'" style="float:right; border-radius:20px;font-size:15px;">x</button>'.'</td>';
+                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='article.php?content_id=".$row['content_id']."'>".$row['title']."</a>" .$row['content_id'].'</td>';
                             echo '</tr>';
                             echo '<tr>';
                             echo '<td rowspan="2"><a href="user_profile.php?'.$row['user_name'].'" class="generic-btn"><img src="'.$row['profile_pic'].'" alt="" style="height:50px"></a></td>';
@@ -95,7 +92,7 @@ $(document).ready(function(){
                             echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:200px; overflow:scroll" class="articleDisplayed" id="'.$row['content_id'].'" >';
                             echo '<table>';
                             echo '<tr>';
-                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='picture.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'] .'<button class="reportContent" type="button" id="'.$row['content_id'].'" style="float:right; border-radius:20px;font-size:15px;">x</button>'.'</td>';
+                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='picture.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'] .'</td>';
                             echo '</tr>';
                             echo '<tr>';
                             echo '<td rowspan="2"><a href="user_profile.php?'.$row['user_name'].'" class="generic-btn"><img src="'.$row['profile_pic'].'" alt="" style="height:50px"></a></td>';
@@ -123,7 +120,7 @@ $(document).ready(function(){
                             echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:350px; overflow:scroll" class="articleDisplayed" id="'.$row['content_id'].'" >';
                             echo '<table>';
                             echo '<tr>';
-                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='video.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'].'<button class="reportContent" type="button" id="'.$row['content_id'].'" style="float:right; border-radius:20px;font-size:15px;">x</button>'.'</td>';
+                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='video.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'].'</td>';
                             echo '</tr>';
                             echo '<tr>';
                             echo '<td rowspan="2"><a href="user_profile.php?'.$row['user_name'].'" class="generic-btn"><img src="'.$row['profile_pic'].'" alt="" style="height:50px"></a></td>';
@@ -151,7 +148,7 @@ $(document).ready(function(){
                             echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:200px; overflow:scroll" class="articleDisplayed" id="'.$row['content_id'].'" >';
                             echo '<table>';
                             echo '<tr>';
-                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='question.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'].'<button class="reportContent" type="button" id="'.$row['content_id'].'" style="float:right; border-radius:20px;font-size:15px;">x</button>'.'</td>';
+                            echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='question.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'].'</td>';
                             echo '</tr>';
                             echo '<tr>';
                             echo '<td rowspan="2"><a href="user_profile.php?'.$row['user_name'].'" class="generic-btn"><img src="'.$row['profile_pic'].'" alt="" style="height:50px"></a></td>';

@@ -36,12 +36,11 @@ $(document).ready(function(){
 </head>
 <body>
 <?php 
-    if($type == "user"){
+
         include 'navbar.php';
-    }
-    if($type == "admin"){
-        include 'adminnavbar.php';
-    }
+
+
+
     ?>
    
 

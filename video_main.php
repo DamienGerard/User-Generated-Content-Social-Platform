@@ -44,12 +44,9 @@ $(document).ready(function(){
     <div class="super-main">
 
     <?php 
-        if($type == "user"){
+
             include 'side_column.php';
-        }
-        if($type == "admin"){
-            include 'adminSide_column.php';
-        }
+
         ?>
 
         <div class="main">
