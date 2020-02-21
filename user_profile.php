@@ -172,7 +172,26 @@
                     </script>
 
                 </div>
+    <script>
+    $(document).ready(function(){
+        $("span.twPc-StatLabel.twPc-block").click(function(){
+            var content_id = $(this).attr('id');
+        $.ajax({
+            url:"esit_user_profile.php",
+            data:{content_id: content_id,user_id: user_id},
+            cache: false,
+            method: "POST",
+            success: function(result){
+                $("div#abcd").html(result);
+            }
+        })
+        });
 
+        $("#profile-image").click(function(){
+            $("#profile-image-upload").click();
+        })
+    });
+    </script>
                 <div class="twPc-divStats">
                     <br>
                     <ul class="twPc-Arrange">
@@ -194,9 +213,62 @@
                                 <span class="twPc-StatValue"><?php echo "$self_description";?></span>
                             
                         </li>
+                        <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Profile</button>
                     </ul>
                 </div>
             </div>   
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+            <label>Profile Picture:</label>
+            <input id="profile-image-upload" type="file" class="hidden" name="fileToUpload"/>
+            <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 50%;height:70px;width:70px;margin-top:4%;">
+        </div>
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" id="firstName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" id="lastName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" id="firstName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Education:</label>
+            <textarea id="education" class="md-textarea form-control" placeholder="Education" rows="4" cols="20" name="education"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Self-Description:</label>
+            <textarea id="description" class="md-textarea form-control" placeholder="About You"  rows="4" cols="20" name="self-description" ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+       <a href="#" id="save" class="btn btn-primary pull-right">Update</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+
+  </div>
+</div>
+
             <div style="width:100%; dsplay:flex;">
                 <div class="tabinator" style="float:left; width:75%;">
                     <!-- <h2>CSS tabs with shadow</h2> -->
@@ -210,7 +282,7 @@
                     <label for="tab4">Questions</label>
                     <div id="content1">
                         <?php
-                            $query = 'SELECT content.content_id, content.title, content.date, user.f_name, user.l_name, user.profile_pic, user.user_name, article.text FROM webprojectdatabase.content INNER JOIN webprojectdatabase.user ON content.user_id = user.user_id INNER JOIN webprojectdatabase.article ON article.article_id = content.content_id WHERE content.user_id='.$thisId.' ORDER BY content.date DESC';
+                            $query = 'SELECT content.content_id, content.title, content.date, user.f_name, user.l_name, user.profile_pic, user.user_name, article.text FROM webprojectdatabase.content INNER JOIN webprojectdatabase.user ON content.user_id = user.user_id INNER JOIN webprojectdatabase.article ON article.article_id = content.content_id WHERE content.user_id='.$thisId.' AND content.marked=0 ORDER BY content.date DESC';
                             $res = $pdo->prepare($query);
                             $res->execute();
                             while($row = $res->fetch()){
