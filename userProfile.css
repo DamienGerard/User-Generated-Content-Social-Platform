@@ -1,4 +1,12 @@
 
+  #cover{
+    height:300px;
+    width:auto;
+    overflow:hidden;
+
+
+  }
+
   .user_profile{
     display:inline;
 
@@ -10,6 +18,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    margin-top:-40%;
   }
 
   .cropcircle{
@@ -34,7 +43,7 @@
     width:96%;  */
 }
 .twPc-bg {
-    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+
     background-position: 0 50%;
     background-size: 100% auto;
     border-bottom: 1px solid #e1e8ed;
@@ -61,13 +70,14 @@
     vertical-align: bottom;
 }
 .twPc-avatarImg {
+    
     border: 2px solid #fff;
     border-radius: 7px;
     box-sizing: border-box;
     color: #fff;
     height: 20%;
     width: 20%;
-    margin-top:-5%;
+    margin-top:-20%;
     margin-left:7%;
 }
 .twPc-divUser {

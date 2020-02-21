@@ -38,6 +38,7 @@
         $dob = $row['DOB'];
         $education = $row['education'];
         $profile_pic1 = $row['profile_pic'];
+        $cover_pic = "uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg";
     }
     else
     {

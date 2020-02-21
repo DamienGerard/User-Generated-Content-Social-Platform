@@ -116,7 +116,7 @@
 
 </head>
 <body>
-    
+     
     <?php include 'navbar.php';?>
 
     <div class="super-main">
@@ -125,7 +125,7 @@
 
         <div class="main">
             <div class="twPc-div" style="border: 1px solid black;">
-                <a class="twPc-bg twPc-block"></a>
+                <div id="cover" class="twPc-bg twPc-block"><img src='<?php echo "$cover_pic";?>'></div>
 
                 <img src='<?php echo "$profile_pic";?>' alt="" class="twPc-avatarImg" style="border: 3px solid black;">
 
@@ -189,7 +189,10 @@
 
         $("#profile-image").click(function(){
             $("#profile-image-upload").click();
-        })
+        });
+        $("#cover-image").click(function(){
+            $("#cover-image-upload").click();
+        });
     });
     </script>
                 <div class="twPc-divStats">
@@ -230,9 +233,14 @@
       </div>
       <div class="modal-body">
       <div class="form-group">
+            <label>Cover Picture:</label>
+            <input id="cover-image-upload" type="file" class="hidden" name="fileToUpload"/>
+            <img src='<?php echo "$cover_pic";?>' id="cover-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
+        </div>
+      <div class="form-group">
             <label>Profile Picture:</label>
             <input id="profile-image-upload" type="file" class="hidden" name="fileToUpload"/>
-            <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 50%;height:70px;width:70px;margin-top:4%;">
+            <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
         </div>
         <div class="form-group">
             <label>First Name:</label>
@@ -244,7 +252,7 @@
         </div>
         <div class="form-group">
             <label>Username:</label>
-            <input type="text" id="firstName" class="form-control">
+            <input type="text" id="userName" class="form-control">
         </div>
         <div class="form-group">
             <label>Date of Birth:</label>
