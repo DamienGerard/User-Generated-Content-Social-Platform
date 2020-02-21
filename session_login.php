@@ -31,14 +31,14 @@
         }
 
         $row = $res->fetch(PDO::FETCH_ASSOC);
-        
+        $id = $row['user_id'];
         $fname = $row['f_name'];
         $lname = $row['l_name'];
         $self_description = $row['self_description'];
         $dob = $row['DOB'];
         $education = $row['education'];
         $profile_pic1 = $row['profile_pic'];
-        $cover_pic = "uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg";
+        $cover_pic = $row['cover_pic'];
     }
     else
     {

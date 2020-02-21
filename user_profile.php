@@ -125,9 +125,9 @@
 
         <div class="main">
             <div class="twPc-div" style="border: 1px solid black;">
-                <div id="cover" class="twPc-bg twPc-block"><img src='<?php echo "$cover_pic";?>'></div>
+                <div id="cover" class="twPc-bg twPc-block" ><img id="coverPic" src='<?php echo "$cover_pic";?>'></div>
 
-                <img src='<?php echo "$profile_pic";?>' alt="" class="twPc-avatarImg" style="border: 3px solid black;">
+                <div id="profile"><img id="profilePic" src='<?php echo "$profile_pic";?>' alt="" class="twPc-avatarImg" style="border: 3px solid black;"></div>
 
                 <div id="twPc-divUser" class="twPc-divUser" >
                     <div class="twPc-divName">
@@ -173,16 +173,31 @@
 
                 </div>
     <script>
+
     $(document).ready(function(){
-        $("span.twPc-StatLabel.twPc-block").click(function(){
-            var content_id = $(this).attr('id');
+        
+        $("#save").click(function(){
+            var cover = document.getElementById("cover-image-upload").files[0].name;
+            var imgPath = "uploads/picture/";
+            var coverPath = imgPath+cover;
+
+            var profile = document.getElementById("profile-image-upload").files[0].name;
+            var profilePath = imgPath+profile;
+
+            var id = <?php echo "$id";?>;
+        
+            var firstName =  $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var dob =  $("#dob").val();
+            var education = $("#education").val();
+            var self_description =  $("#description").val();
         $.ajax({
-            url:"esit_user_profile.php",
-            data:{content_id: content_id,user_id: user_id},
+            url:"edit_user_profile.php",
+            data:{Id: id,Cover_pic: coverPath,Profile_pic: profilePath,FirstName:firstName,LastName:lastName,Dob:dob,Education:education,Self_description:self_description},
             cache: false,
             method: "POST",
             success: function(result){
-                $("div#abcd").html(result);
+               
             }
         })
         });
@@ -201,19 +216,19 @@
                         <li class="twPc-ArrangeSizeFit">
                             
                                 <span class="twPc-StatLabel twPc-block">Date of Birth</span>
-                                <span class="twPc-StatValue"><?php echo "$dob";?></span>
+                                <span id="dateOfBirth" class="twPc-StatValue"><?php echo "$dob";?></span>
                         
                         </li>
                         <li class="twPc-ArrangeSizeFit">
                             
                                 <span class="twPc-StatLabel twPc-block">Education</span>
-                                <span class="twPc-StatValue"><?php echo "$education";?></span>
+                                <span id="educ" class="twPc-StatValue"><?php echo "$education";?></span>
                             
                         </li>
                         <li class="twPc-ArrangeSizeFit">
                             
                                 <span class="twPc-StatLabel twPc-block">About myself</span>
-                                <span class="twPc-StatValue"><?php echo "$self_description";?></span>
+                                <span id="self" class="twPc-StatValue"><?php echo "$self_description";?></span>
                             
                         </li>
                         <!-- Trigger the modal with a button -->
@@ -234,41 +249,39 @@
       <div class="modal-body">
       <div class="form-group">
             <label>Cover Picture:</label>
-            <input id="cover-image-upload" type="file" class="hidden" name="fileToUpload"/>
+            <input id="cover-image-upload" value = <?php echo "$cover_pic";?> type="file" class="hidden" name="fileToUpload"/>
             <img src='<?php echo "$cover_pic";?>' id="cover-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
         </div>
       <div class="form-group">
             <label>Profile Picture:</label>
-            <input id="profile-image-upload" type="file" class="hidden" name="fileToUpload"/>
+            <input id="profile-image-upload" value = <?php echo "$profile_pic";?> type="file" class="hidden" name="fileToUpload"/>
             <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
         </div>
         <div class="form-group">
             <label>First Name:</label>
-            <input type="text" id="firstName" class="form-control">
+            <input type="text" id="firstName" class="form-control" value=<?php echo $fname;?>>
         </div>
         <div class="form-group">
             <label>Last Name:</label>
-            <input type="text" id="lastName" class="form-control">
+            <input type="text" id="lastName" class="form-control" value=<?php echo $lname;?>>
         </div>
-        <div class="form-group">
-            <label>Username:</label>
-            <input type="text" id="userName" class="form-control">
-        </div>
+
         <div class="form-group">
             <label>Date of Birth:</label>
-            <input type="date" id="dob" class="form-control">
+            <input type="date" id="dob" class="form-control" value=<?php echo "$dob";?>>
         </div>
         <div class="form-group">
             <label>Education:</label>
-            <textarea id="education" class="md-textarea form-control" placeholder="Education" rows="4" cols="20" name="education"></textarea>
+            <textarea id="education"  class="md-textarea form-control"  rows="4" cols="20" name="education" ><?php echo "$education";?></textarea>
         </div>
         <div class="form-group">
             <label>Self-Description:</label>
-            <textarea id="description" class="md-textarea form-control" placeholder="About You"  rows="4" cols="20" name="self-description" ></textarea>
+            <textarea id="description" class="md-textarea form-control" placeholder="About You"  rows="4" cols="20" name="self-description" ><?php echo "$self_description";?></textarea>
         </div>
       </div>
       <div class="modal-footer">
-       <a href="#" id="save" class="btn btn-primary pull-right">Update</a>
+      <button type="button" id="save" class="btn btn-primary pull-right" >Update</button>
+       
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       
       </div>
