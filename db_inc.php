@@ -4,10 +4,10 @@
 $host = 'localhost';
 
 /* MySQL account username */
-$user = 'nicolasmelanie';
+$user = 'root';
 
 /* MySQL account password */
-$passwd = '1234';
+$passwd = 'thisisapassword';
 
 /* The schema you want to use */
 $schema = 'webprojectdatabase';
