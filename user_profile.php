@@ -175,8 +175,8 @@
     <script>
 
     $(document).ready(function(){
-        
-        $("#save").click(function(){
+        //issue with internet, ajax wasn't working, test feature once internet resolved
+        $("button#update").(function(){
             var cover = document.getElementById("cover-image-upload").files[0].name;
             var imgPath = "uploads/picture/";
             var coverPath = imgPath+cover;
@@ -284,7 +284,7 @@
         </div>
       </div>
       <div class="modal-footer">
-      <button type="button" id="save" class="btn btn-primary pull-right" >Update</button>
+      <button type="button" id="update" class="btn btn-primary pull-right" >Update</button>
        
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       
