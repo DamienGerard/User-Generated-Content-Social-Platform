@@ -17,10 +17,12 @@ try {
     $res = $pdo->prepare($query);
     $res->execute($values);
   
-   
+   echo json_encode(array("cover"=>$Cover_pic,"profile"=>$Profile_pic,"firstName"=>$FirstName,"lastName"=>$LastName,"dateOfBirth"=>$Dob,"education"=>$Education,"self_description"=>$Self_description));
 
 }catch (PDOException $e){
     throw new Exception('Database query error');
 }
+
+
 
 ?>

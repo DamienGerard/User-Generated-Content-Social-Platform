@@ -180,12 +180,9 @@
             var cover = document.getElementById("cover-image-upload").files[0].name;
             var imgPath = "uploads/picture/";
             var coverPath = imgPath+cover;
-
             var profile = document.getElementById("profile-image-upload").files[0].name;
             var profilePath = imgPath+profile;
-
             var id = <?php echo "$id";?>;
-        
             var firstName =  $("#firstName").val();
             var lastName = $("#lastName").val();
             var dob =  $("#dob").val();
@@ -196,8 +193,15 @@
             data:{Id: id,Cover_pic: coverPath,Profile_pic: profilePath,FirstName:firstName,LastName:lastName,Dob:dob,Education:education,Self_description:self_description},
             cache: false,
             method: "POST",
-            success: function(result){
-               
+            success: function(response){
+                alert("ok");
+                var res = JSON.parse(response);
+                $("#coverPic").attr('src',res.cover);
+                $("#profilePic").attr('src',res.profile);
+                $("#firstName").val(res.firstName);
+                $("#lastName").val(res.lastName);
+                $("#dateOfBirth").val(res.dateOfBirth);
+                $("self").val(res.self_description);
             }
         })
         });
@@ -232,12 +236,12 @@
                             
                         </li>
                         <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Profile</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Edit Profile</button>
                     </ul>
                 </div>
             </div>   
 
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal1" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
     <!-- Modal content-->
