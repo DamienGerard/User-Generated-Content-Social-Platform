@@ -176,6 +176,8 @@
 
     $(document).ready(function(){
         //issue with internet, ajax wasn't working, test feature once internet resolved
+
+        
         $("button#update").(function(){
             var cover = document.getElementById("cover-image-upload").files[0].name;
             var imgPath = "uploads/picture/";
