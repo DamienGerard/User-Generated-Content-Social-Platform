@@ -65,5 +65,5 @@ if($res->rowCount() > 0) {
     
     $pdo->commit();
 
-    echo '<button id="friendButton" class="in-relation-button" onclick="processFollow()" >Pending</button>';
+    echo '<button id="friendButton" class="in-relation-button" onclick="processFriend()" >Pending</button>';
 }

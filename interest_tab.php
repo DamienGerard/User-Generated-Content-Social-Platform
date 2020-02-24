@@ -14,17 +14,22 @@
                 }
 
                 while($row = $res->fetch()){
-                    $notif_template = '<table id="'.$row['interest_id'].'" class="generic-btn" width="100%">
+                    $interest_template = '<table id="'.$row['interest_id'].'" class="generic-btn" width="100%">
                                     <tr style="padding: 1px;">
                                         <td rowspan="2" style="padding: 1px;">
                                             <a class="anchor-list-item" href="interest.php?interest='.$row['name'].'"><img class="circle" src="'.$row['picture'].'" height="50px"></a>
                                         </td>
-                                        <td style="padding: 1px;" width="75%"><a class="anchor-list-item" href="interest.php?interest='.$row['name'].'"><strong>'.$row['name'].'</strong></a></td>
-                                        <td><button class="close" width="5%" onclick=\'handleInterest("delete","'.$subject_type.'",'.$thisId.','.$row['interest_id'].')\'>&times;</button></td>
-                                    </tr>
+                                        <td style="padding: 1px;" width="75%"><a class="anchor-list-item" href="interest.php?interest='.$row['name'].'"><strong>'.$row['name'].'</strong></a></td>';
+
+                                        if($login && $thisId==$id){
+                                            $interest_template =  $interest_template.'<td><button class="close" width="5%" onclick=\'handleInterest("delete","'.$subject_type.'",'.$thisId.','.$row['interest_id'].')\'>&times;</button></td>';
+                                        }
+                                        
+
+                                    $interest_template =  $interest_template.'</tr>
                                     <tr style="padding: 1px;"><td style="padding: 1px; font-size:10px;">'.$row['description'].'</td></tr>
                                 </table>';
-                    echo $notif_template;
+                    echo $interest_template;
                 }
             ?>
             <script>
@@ -57,7 +62,7 @@
             
         </div>
         <!-- Trigger the modal with a button -->
-        <div style="text-align:center; margin-bottom: 5px;"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Interest</button></div>
+        <?php if($login && $thisId==$id){ ?><div style="text-align:center; margin-bottom: 5px;"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Interest</button></div><?php } ?>
         
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">

@@ -124,7 +124,7 @@
         <?php include 'side_column.php';?>
 
         <div class="main">
-            <div class="twPc-div" style="border: 1px solid black;">
+            <div id="reload-twPc-div"><div id="twPc-div" class="twPc-div" style="border: 1px solid black; width:95%;">
                 <div id="cover" class="twPc-bg twPc-block" ><img id="coverPic" src='<?php echo "$cover_pic";?>'></div>
 
                 <div id="profile"><img id="profilePic" src='<?php echo "$profile_pic";?>' alt="" class="twPc-avatarImg" style="border: 3px solid black;"></div>
@@ -172,50 +172,7 @@
                     </script>
 
                 </div>
-    <script>
 
-    $(document).ready(function(){
-        //issue with internet, ajax wasn't working, test feature once internet resolved
-
-        
-        $("button#update").(function(){
-            var cover = document.getElementById("cover-image-upload").files[0].name;
-            var imgPath = "uploads/picture/";
-            var coverPath = imgPath+cover;
-            var profile = document.getElementById("profile-image-upload").files[0].name;
-            var profilePath = imgPath+profile;
-            var id = <?php echo "$id";?>;
-            var firstName =  $("#firstName").val();
-            var lastName = $("#lastName").val();
-            var dob =  $("#dob").val();
-            var education = $("#education").val();
-            var self_description =  $("#description").val();
-        $.ajax({
-            url:"edit_user_profile.php",
-            data:{Id: id,Cover_pic: coverPath,Profile_pic: profilePath,FirstName:firstName,LastName:lastName,Dob:dob,Education:education,Self_description:self_description},
-            cache: false,
-            method: "POST",
-            success: function(response){
-                alert("ok");
-                var res = JSON.parse(response);
-                $("#coverPic").attr('src',res.cover);
-                $("#profilePic").attr('src',res.profile);
-                $("#firstName").val(res.firstName);
-                $("#lastName").val(res.lastName);
-                $("#dateOfBirth").val(res.dateOfBirth);
-                $("self").val(res.self_description);
-            }
-        })
-        });
-
-        $("#profile-image").click(function(){
-            $("#profile-image-upload").click();
-        });
-        $("#cover-image").click(function(){
-            $("#cover-image-upload").click();
-        });
-    });
-    </script>
                 <div class="twPc-divStats">
                     <br>
                     <ul class="twPc-Arrange">
@@ -238,10 +195,10 @@
                             
                         </li>
                         <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Edit Profile</button>
+                    <?php if($login && $thisId==$id){ ?><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Edit Profile</button><?php } ?>
                     </ul>
                 </div>
-            </div>   
+            </div></div>   
 
 <div id="myModal1" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -253,37 +210,39 @@
         <h4 class="modal-title">Edit Profile</h4>
       </div>
       <div class="modal-body">
-      <div class="form-group">
-            <label>Cover Picture:</label>
-            <input id="cover-image-upload" value = <?php echo "$cover_pic";?> type="file" class="hidden" name="fileToUpload"/>
-            <img src='<?php echo "$cover_pic";?>' id="cover-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
-        </div>
-      <div class="form-group">
-            <label>Profile Picture:</label>
-            <input id="profile-image-upload" value = <?php echo "$profile_pic";?> type="file" class="hidden" name="fileToUpload"/>
-            <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
-        </div>
+      <form id="updateProfile">
         <div class="form-group">
-            <label>First Name:</label>
-            <input type="text" id="firstName" class="form-control" value=<?php echo $fname;?>>
-        </div>
+                <label>Cover Picture:</label>
+                <input id="cover-image-upload" value = <?php echo $cover_pic;?> type="file" name="coverImage"/>
+                <img src='<?php echo "$cover_pic";?>' id="cover-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
+            </div>
         <div class="form-group">
-            <label>Last Name:</label>
-            <input type="text" id="lastName" class="form-control" value=<?php echo $lname;?>>
-        </div>
+                <label>Profile Picture:</label>
+                <input id="profile-image-upload" value = <?php echo $profile_pic;?> type="file"  name="profileImage"/>
+                <img src='<?php echo "$profile_pic";?>' id="profile-image" alt="" class="twPc-avatarImg" style="border-radius: 20%;height:70px;width:70px;margin-top:4%;">
+            </div>
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" value=<?php echo $fname;?>>
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" value=<?php echo $lname;?>>
+            </div>
 
-        <div class="form-group">
-            <label>Date of Birth:</label>
-            <input type="date" id="dob" class="form-control" value=<?php echo "$dob";?>>
-        </div>
-        <div class="form-group">
-            <label>Education:</label>
-            <textarea id="education"  class="md-textarea form-control"  rows="4" cols="20" name="education" ><?php echo "$education";?></textarea>
-        </div>
-        <div class="form-group">
-            <label>Self-Description:</label>
-            <textarea id="description" class="md-textarea form-control" placeholder="About You"  rows="4" cols="20" name="self-description" ><?php echo "$self_description";?></textarea>
-        </div>
+            <div class="form-group">
+                <label>Date of Birth:</label>
+                <input type="date" id="dob" name="dob" class="form-control" value=<?php echo "$dob";?>>
+            </div>
+            <div class="form-group">
+                <label>Education:</label>
+                <textarea id="education" name="education" class="md-textarea form-control"  rows="4" cols="20"><?php echo "$education";?></textarea>
+            </div>
+            <div class="form-group">
+                <label>Self-Description:</label>
+                <textarea id="description" name="selfDescription" class="md-textarea form-control" placeholder="About You"  rows="4" cols="20" ><?php echo "$self_description";?></textarea>
+            </div>
+      </form>
       </div>
       <div class="modal-footer">
       <button type="button" id="update" class="btn btn-primary pull-right" >Update</button>
@@ -292,7 +251,52 @@
       
       </div>
     </div>
+    <script>
 
+    $(document).ready(function(){
+        //issue with internet, ajax wasn't working, test feature once internet resolved
+
+        
+        $("button#update").on('click', function(){
+        let formData = new FormData();   
+        formData.append('firstName', $("#firstName").val()); 
+        formData.append('lastName', $("#lastName").val());
+        formData.append('dob', $("#dob").val());
+        formData.append('education', $("#education").val());
+        formData.append('selfDescription', $("#description").val());
+        if($('#cover-image-upload').get(0).files.length !== 0){
+            console.log("Cover picture exists!");
+            formData.append('coverImage', $("#cover-image-upload")[0].files[0], $("#cover-image-upload").val().split('\\').pop());
+        }
+
+        if($('#profile-image-upload').get(0).files.length !== 0){
+            console.log("Profile picture exists!");
+            formData.append('profileImage', $("#profile-image-upload")[0].files[0], $("#profile-image-upload").val().split('\\').pop());
+        }
+        
+        $.ajax({
+            url:"edit_user_profile.php",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(response){
+                alert("Olryte");
+                console.log(response);
+                $("#reload-twPc-div").load(location.href + " #twPc-div");
+            }
+        })
+        });
+
+        $("#profile-image").click(function(){
+            $("#profile-image-upload").click();
+        });
+        $("#cover-image").click(function(){
+            $("#cover-image-upload").click();
+        });
+    });
+    </script>
   </div>
 </div>
 
