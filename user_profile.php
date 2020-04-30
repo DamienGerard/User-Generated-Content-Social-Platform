@@ -77,7 +77,7 @@
 
         $username = $res->fetch()['user_name'];
     }
-/*  
+/*  issue loading xml
     $url1 = file_get_contents('http://localhost/UniWebProject/user_profile_xml.php?id='.$id);
 
     $dom1 = new DOMDocument;
