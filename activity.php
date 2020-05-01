@@ -48,15 +48,15 @@ table, th, td {
 }
 </style>
     <div id="likeButtons">
-        <div id = "like" class="generic-btn <?php if($login && $type=='like'){ echo 'highlight';} ?>" <?php if($login){?>onclick="processLike('like')"<?php } ?>><i class="far fa-thumbs-up"></i> <?php echo $nLikes; ?></div>
-        <div id = "dislike" class="generic-btn <?php if($login && $type=='dislike'){ echo 'highlight';} ?>" <?php if($login){?>onclick="processLike('dislike')"<?php } ?>><i class="far fa-thumbs-down"></i> <?php echo $nDislikes; ?></div>
+        <div id = "like" class="generic-btn <?php if($login && $type=='like'){ echo 'highlight';} ?>" <?php if($login){?>onclick="processLike('like')"<?php } ?>><i class="far fa-thumbs-up"></i> <span id="like-count"><?php echo $nLikes; ?></span></div>
+        <div id = "dislike" class="generic-btn <?php if($login && $type=='dislike'){ echo 'highlight';} ?>" <?php if($login){?>onclick="processLike('dislike')"<?php } ?>><i class="far fa-thumbs-down"></i> <span id="dislike-count"><?php echo $nDislikes; ?></span></div>
             <br>
     </div>  
     <div id="post-comment">  
         <textarea name="comment" id="comment" style="width:45%; display:block" rows="1" form="getComment"></textarea>
         <button class="generic-btn create-content" <?php if($login){?>onclick="processComment()"<?php } ?>>Comment</button>
     </div>
-    
+    <button  type="button" id="'+content_id+'" style="float:right; border-radius:20px;font-size:15px;" onclick="reportContent(<?php echo $content_id;?>)">x</button>
     <br><br><hr><br>
     <h3>Comments</h3>
     <br>
@@ -89,31 +89,66 @@ table, th, td {
     <?php if($login){?>
     <script>
         function processLike(type){
-            var unique = new Date().getUTCMilliseconds();
-            console.log('processLike.php?type='+type+'&content_id='+<?php echo $content_id; ?>+'&content_type=<?php echo $content_type; ?>&user_id='+<?php echo $user_id; ?>+'&view_id='+<?php echo $myViewId; ?>+'&unique='+unique);
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'processLike.php?type='+type+'&content_id='+<?php echo $content_id; ?>+'&content_type=<?php echo $content_type; ?>&user_id='+<?php echo $user_id; ?>+'&view_id='+<?php echo $myViewId; ?>+'&unique='+unique, true);
-
-            xhr.onload = function(){
-                document.getElementById('likeButtons').innerHTML=this.responseText;
-                $("#likeButtons").load(" #likeButtons");
-            }
-            
-            xhr.send();
+            $.ajax({
+                url: 'http://localhost:1234/webProject/content/like/',
+                type: 'get',
+                dataType : "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#like-count').html(data.like_count);
+                    if(data.toggle_like){
+                        $('#like').toggleClass("highlight");
+                    }
+                    $('#dislike-count').html(data.dislike_count);
+                    if(data.toggle_dislike){
+                        $('#dislike').toggleClass("highlight");
+                    }
+                },
+                data: {
+                    type: type,
+                    content_id: '<?php echo $content_id; ?>',
+                    content_type: '<?php echo $content_type; ?>',
+                    user_id: '<?php echo $user_id; ?>',
+                    view_id: '<?php echo $myViewId; ?>',
+                    liker_id: '<?php echo $account->getId(); ?>'
+                }
+            });
         }
-
+        
         function processComment(){
-            var unique = new Date().getUTCMilliseconds();
-            var xhr = new XMLHttpRequest();
-            console.log('post_comment.php?text='+document.getElementById('comment').value+'&view_id='+<?php echo $myViewId; ?>+'&content_type=<?php echo $content_type; ?>&user_id='+<?php echo $user_id; ?>+'&unique='+unique);
-            xhr.open('GET', 'post_comment.php?text='+document.getElementById('comment').value+'&view_id='+<?php echo $myViewId; ?>+'&content_type=<?php echo $content_type; ?>&user_id='+<?php echo $user_id; ?>+'&unique='+unique, true);
-
-            xhr.onload = function(){
-                $("#comment-container").load(" #comment-container");
-                $("#post-comment").load(" #post-comment");
-            }
-            
-            xhr.send();
+            $.ajax({
+                url: 'http://localhost:1234/webProject/content/comment/',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#comment-container").load(" #comment-container");
+                    $("#post-comment").load(" #post-comment");
+                },
+                data: {
+                    text: document.getElementById('comment').value,
+                    view_id: '<?php echo $myViewId; ?>',
+                    content_type: '<?php echo $content_type; ?>',
+                    user_id: '<?php echo $user_id; ?>',
+                    commenter_id: '<?php echo $account->getId(); ?>'
+                }
+            });
+        }
+    
+        function reportContent(content_id){
+            console.log("hello");
+            var user_id = <?php echo $account->getId(); ?>;
+            $.ajax({
+                url:"processReport.php",
+                data:{content_id: content_id,user_id: user_id},
+                cache: false,
+                method: "POST",
+                success: function(result){
+                    if(result.length>10){
+                        alert(result);
+                    }
+                }
+            })
         }
     </script>
     <?php }?>

@@ -37,7 +37,7 @@ body{
 
 nav ul li{
     margin-top: 5px;
-    padding-left: 10px;
+    padding-left: 20px;
     margin-bottom: 5px;
     color: black;
     display: inline-block;
@@ -157,8 +157,8 @@ ul{
 .super-main{
    width: 100%;
    border-top: 3px solid;
+   border-bottom: 3px solid;
    margin:0px;
-   font-size: 0px;
    display:flex;
 }
 
@@ -178,14 +178,14 @@ ul{
 .main{
     font-size:16px;
     margin: 0px;
-    padding: 10px;
+    padding: 0px;
     width: 81%;
     min-height: 100vh;
     display: inline-block;
     vertical-align:top;
-    margin-right: 10%;
-    margin-left: 5%;
-    box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+    margin-right: 10px;
+    margin-left: 30px;
+    /* box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8); */
 
 }
 
@@ -487,3 +487,4 @@ textarea {
     font-size: 12px;
     text-decoration: none;
 }
+

@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if(session_status()!==PHP_SESSION_ACTIVE){
+        session_start();
+    }
     require './db_inc.php';
     require './account_class.php';
                  

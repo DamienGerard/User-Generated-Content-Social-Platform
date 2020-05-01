@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/UpdateLike",
+    "definitions": {
+        "UpdateLike": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "like_count": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "dislike_count": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "toggle_like": {
+                    "type": "boolean"
+                },
+                "toggle_dislike": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "dislike_count",
+                "like_count",
+                "toggle_dislike",
+                "toggle_like"
+            ],
+            "title": "UpdateLike"
+        }
+    }
+}

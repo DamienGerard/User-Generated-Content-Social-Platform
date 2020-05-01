@@ -1,0 +1,12 @@
+Options +FollowSymlinks
+RewriteEngine on
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+#Options -MultiViews
+
+# map neat URL to internal URL
+RewriteRule ^content/like/$   restController.php?resource=content&page_key=like [QSA,L]
+RewriteRule ^content/like$   restController.php?resource=content&page_key=like [QSA,L]
+
+RewriteRule ^content/comment/$   restController.php?resource=content&page_key=comment [nc,qsa]
+RewriteRule ^content/comment$   restController.php?resource=content&page_key=comment [nc,qsa]

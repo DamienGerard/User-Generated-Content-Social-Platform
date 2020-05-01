@@ -1,4 +1,5 @@
-<?php include 'session_login.php';?>
+<?php include 'session_login.php';
+    include 'admin/admin_session_login.php';?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,72 +12,114 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/e279e577b6.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <script>
-var user_id = <?php echo $account->getId(); ?>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
 
-$(document).ready(function(){
-    $("button.reportContent").click(function(){
-        var content_id = $(this).attr('id');
-        $.ajax({
-            url:"processReport.php",
-            data:{content_id: content_id,user_id: user_id},
-            cache: false,
-            method: "POST",
-            success: function(result){
-                $("div#abcd").html(result);
-            }
-        })
+        .header {
+            text-align: center;
+            padding: 32px;
+        }
 
-    });
-});
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
 
-</script>
+        /* Create four equal columns that sits next to each other */
+        .column {
+            -ms-flex: 33%; /* IE10 */
+            flex: 33%;
+            max-width: 33%;
+            padding: 0 4px;
+        }
 
+        .column img {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<?php 
-
-        include 'navbar.php';
-
-    ?>
+<?php include 'navbar.php';?>
     
     <div class="super-main">
 
-    <?php 
-
-            include 'side_column.php';
-
-        ?>
+    <?php include 'side_column.php';?>
 
         <div class="main">
             <div class="generic-btn" style="display:block; width:75px"><a href="image_main.php" class="anchor-list-item"> <h3>Videos</h3> </a></div>
+            <div id="video-gallery" class="row">
+                <div class="column" id="video-column1"></div>
+                <div class="column" id="video-column2"></div>  
+                <div class="column" id="video-column3"></div>
+            </div>
                 <?php
-                    $query = 'SELECT * FROM webprojectdatabase.video INNER JOIN webprojectdatabase.content ON content.content_id = video.video_id INNER JOIN webprojectdatabase.user ON user.user_id = content.user_id ORDER BY content.date DESC';
-                    $res = $pdo->prepare($query);
-                    $res->execute();
-                    echo '<div id="abcd"></div>';
-                    while($row = $res->fetch()){
-                        echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:350px; overflow:hidden" class="articleDisplayed" id="'.$row['content_id'].'">';
-                        echo '<table>';
-                        echo '<tr>';
-                        echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='video.php?content_id=".$row['content_id']."'>".$row['title']."</a>".$row['content_id'].'<button class="reportContent" type="button" id="'.$row['content_id'].'" style="float:right; border-radius:20px;font-size:15px;">x</button>'.'</td>';
-                        echo '</tr>';
-                        echo '<tr>';
-                        echo '<td rowspan="2"><a href="user_profile.php?user='.$row['user_name'].'" class="generic-btn"><img src="'.$row['profile_pic'].'" alt="" style="height:50px"></a></td>';
-                        echo '<td><a class="generic-btn anchor-list-item" href="user_profile.php?user='.$row['user_name'].'"><p>'.$row['f_name'].' '.$row['l_name'].'</p></a></td>';
-                        echo '</tr>';
-                        echo '<tr>';
-                        echo "<td>".$row['date']."</td>";
-                        echo '</tr>';
-                        echo '<tr>';
-                        echo '<td colspan="2"><a class="generic-btn anchor-list-item" href="video.php?content_id='.$row['content_id'].'"><img src="'.$row['thumbnail_path'].'" alt="" ></a></td>';
-                        echo '</tr>';
-                        echo '</table>';
-                        echo '</div>';
-                        echo '<br><br>';
-                    }
+                    $queryVideo = 'SELECT * FROM webprojectdatabase.video INNER JOIN webprojectdatabase.content ON content.content_id = video.video_id INNER JOIN webprojectdatabase.user ON user.user_id = content.user_id WHERE content.marked=0 ORDER BY content.date DESC';
                 ?>
+                <script>
+                    $(document).ready(function(){
+                       $.get( "get_content_xml.php", { video: "<?php echo $queryVideo?>" } )
+                        .done(function( xmlDoc ) {
+                            var videoList = xmlDoc.querySelectorAll("[type='VIDEO']");
+                            
+                            for(i=0; i<videoList.length; i++){
+                                var video_title = videoList[i].getElementsByTagName('title')[0].firstChild.nodeValue;
+                                var content_id = videoList[i].getAttribute("content_id"); 
+                                var video_user_name = videoList[i].getElementsByTagName('user_name')[0].firstChild.nodeValue;
+                                var video_profile_pic = videoList[i].getElementsByTagName('profile_pic')[0].firstChild.nodeValue;
+                                var video_f_name = videoList[i].getElementsByTagName('f_name')[0].firstChild.nodeValue;
+                                var video_l_name = videoList[i].getElementsByTagName('l_name')[0].firstChild.nodeValue;
+                                var video_date = videoList[i].getElementsByTagName('date')[0].firstChild.nodeValue;
+                                var video_data = videoList[i].getElementsByTagName('data')[0].firstChild.nodeValue;
+                                
+                                var video_Pane = createElementFromHTML('<div class="w3-container w3-card w3-white w3-round w3-margin"><a class="generic-btn anchor-list-item" href="video.php?content_id='+content_id+'"><h4>'+video_title+'</h4></a><br><a href="user_profile.php?user='+video_user_name+'"><img src="'+video_profile_pic+'" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:25px"></a><a class="generic-btn anchor-list-item" href="user_profile.php?user='+video_user_name+'"><h6>'+video_f_name+' '+video_l_name+'</h6></a><button  type="button" id="'+content_id+'" style="float:right; border-radius:20px;font-size:15px;" onclick="reportContent('+content_id+')">x</button><br><span class="w3-right w3-opacity">'+video_date+'</span><hr class="w3-clear"><a href="video.php?content_id='+content_id+'"><img src="'+video_data+'" style="width:100%"></a></div>');
+                                
+                                if(i%3 === 0){
+                                    document.getElementById('video-column1').appendChild(video_Pane);
+                                }else if(i%3 === 1){
+                                    document.getElementById('video-column2').appendChild(video_Pane);
+                                }else if(i%3 === 2){
+                                    document.getElementById('video-column3').appendChild(video_Pane);
+                                }
+                            }
+                        });
+                    });
+    
+                    function reportContent(content_id){
+                        console.log("hello");
+                        var user_id = <?php echo $account->getId(); ?>;
+                        $.ajax({
+                            url:"processReport.php",
+                            data:{content_id: content_id,user_id: user_id},
+                            cache: false,
+                            method: "POST",
+                            success: function(result){
+                                if(result.length>10){
+                                    alert(result);
+                                }
+                            }
+                        })
+                    }
+    
+                    function createElementFromHTML(htmlString) {
+                        var div = document.createElement('div');
+                        div.innerHTML = htmlString.trim();
+    
+                        return div.firstChild; 
+                    }
+                </script>
         </div>        
     </div>
 

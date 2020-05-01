@@ -1,6 +1,12 @@
 <?php include 'session_login.php';?>
 
 <?php
+use Opis\JsonSchema\{
+    Validator, ValidationResult, ValidationError, Schema
+};
+
+require 'vendor/autoload.php';
+$notification_schema = Schema::fromJsonString(file_get_contents('notification_schema.json'));
 $user_id = $account->getId();;
 
 $query = "SELECT notification.event_id, notification.event_type, notification.cause_id, notification.cause_type, notification.seen, DATE_FORMAT(notification.date, '%W %M %e %Y') as date FROM webprojectdatabase.notification WHERE notification.user_id = :user_id ORDER BY date DESC, seen ASC LIMIT 5";
@@ -14,7 +20,9 @@ try {
 }catch (PDOException $e){
     throw new Exception('Database query error');
 } 
-
+$notif_data = array();
+$notif_node = array();
+$notif_index = 0;
 $notif = '';
 $cause_name = '';
 $cause_pic = '';
@@ -134,26 +142,38 @@ while($row = $res->fetch()){
 
         }
     }
-    $notif_template = '<table class="generic-btn" width="400">
-                    <tr style="padding: 1px;">
-                        <td rowspan="2" style="padding: 1px;">
-                            <a class="anchor-list-item" href="user_profile.php?user='.$cause_username.'"><img class="circle" src="'.$cause_pic.'" alt="images/user_icon.png" height="50px"></a>
-                        </td>
-                        <td style="padding: 1px;" width="'.$main_width.'">'.$notif_main.'</td>'.$new_notif.'
-                    </tr>
-                    <tr style="padding: 1px;"><td style="padding: 1px;">'.$notif_date.'</td></tr>
-                </table>';
-    echo $notif_template;
+    $notif_data[$notif_index] = array("cause_username"=>$cause_username, "cause_pic"=>$cause_pic, "main_width"=>$main_width, "notif_main"=>$notif_main, "new_notif"=>$new_notif, "notif_date"=>$notif_date);
+    $notif_index++;
 }
 
-$query = "UPDATE webprojectdatabase.notification SET seen = 1 WHERE notification.user_id = :user_id AND notification.seen=0 ORDER BY date DESC, seen ASC LIMIT 5";
-$values = array(':user_id'=>$user_id);
+$notif_json = json_encode($notif_data);
 
-try {
-    $res = $pdo->prepare($query);
-    $res->execute($values);
-}catch (PDOException $e){
-    throw new Exception('Database query error');
+$notification_validator = new Validator();
+
+/** @var ValidationResult $result */
+$result = $notification_validator->schemaValidation(json_decode($notif_json), $notification_schema);
+
+if($result->isValid()){
+    echo $notif_json;
+    $query = "UPDATE webprojectdatabase.notification SET seen = 1 WHERE notification.user_id = :user_id AND notification.seen=0 ORDER BY date DESC, seen ASC LIMIT 5";
+    $values = array(':user_id'=>$user_id);
+
+    try {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }catch (PDOException $e){
+        throw new Exception('Database query error');
+    }
+
+    $pdo->commit();
+}else{
+    /** @var ValidationError $error */
+    $error = $result->getErrors();
+    echo '$data is invalid', PHP_EOL;
+    
+    foreach ($error as $key => $value) {
+        # code...
+        echo "Error: ", $value->keyword(), PHP_EOL;
+        echo json_encode($value->keywordArgs(), JSON_PRETTY_PRINT), PHP_EOL;
+    }
 }
-
-$pdo->commit();

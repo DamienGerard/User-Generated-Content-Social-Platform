@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Comment",
+    "definitions": {
+        "Comment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "view_id": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "content_type": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "commenter_id": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "content_type",
+                "text",
+                "user_id",
+                "view_id",
+                "commenter_id"
+            ],
+            "title": "Comment"
+        }
+    }
+}
