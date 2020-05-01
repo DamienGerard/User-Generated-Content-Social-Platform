@@ -6,6 +6,7 @@
     $isFriend = false;
     $friendButtonText = 'Friend';
 
+
     if(isset($_GET['user'])){
 
         $username = $_GET['user'];
@@ -77,29 +78,7 @@
 
         $username = $res->fetch()['user_name'];
     }
-/*  issue loading xml
-    $url1 = file_get_contents('http://localhost/UniWebProject/user_profile_xml.php?id='.$id);
 
-    $dom1 = new DOMDocument;
-    $dom1->preserveWhiteSpace = FALSE;
-    @$dom1->load($url1);
-    
-     if($dom1->schemaValidate('user_profile.xsd')){
-                echo 'document is valid';
-                echo '<br>';
-            }
-            else{
-                echo 'document is not valid';
-            }
-
-    $person_nodes = $dom1->getElementsByTagName('user')[0]->nodeValue;
-    foreach($person_nodes as $person_node){
-    $fname = $person_node->getElementsByTagName('f_name')[0]->nodeValue;
-    $lname = $person_node->getElementsByTagName('l_name')[0]->nodeValue;
-    $self_description = $person_node->getElementsByTagName('description')[0]->nodeValue;
-    $dob = $person_node->getElementsByTagName('DOB')[0]->nodeValue;
-    $education = $person_node->getElementsByTagName('education')[0]->nodeValue;
-    }*/
     $query = 'SELECT * FROM webprojectdatabase.user WHERE (user_id=:id)';
     $values = array(':id'=>$thisId);
     try
@@ -169,6 +148,17 @@
                     <?php if($thisId!=$account->getId()){ ?>
                     <button id="followButton" class="<?php if($isFollowed){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="processFollow()" <?php } ?>><?php if($isFollowed){echo 'Following';}else{echo 'Follow';} ?></button>
                     <?php }else{} ?>
+
+                    <?php if($thisId==$account->getId()){ ?>
+                    <button id="friendMain" class="<?php if($isFriend){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="location.href='friend_main.php';" <?php } ?> ><?php echo "Friends" ?></button>
+                    <?php }else{} ?>
+                        <?php if($thisId==$account->getId()){ ?>
+                    <button id="followerMain" class="<?php if($isFriend){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="location.href='follower_main.php';" <?php } ?> ><?php echo "Followers" ?></button>
+                    <?php }else{} ?>
+                        <?php if($thisId==$account->getId()){ ?>
+                    <button id="followingMain" class="<?php if($isFriend){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="location.href='following_main.php';" <?php } ?> ><?php echo "Followings" ?></button>
+                    <?php }else{} ?>
+
                     <script>
                         function processFollow(){
                             var unique = new Date().getUTCMilliseconds();
@@ -343,7 +333,7 @@
                             $res = $pdo->prepare($query);
                             $res->execute();
                             while($row = $res->fetch()){
-                                echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:200px; overflow:hidden">';
+                                echo '<div style="background-color:lightgrey; border-radius: 5px; border: 3px solid black; height:200px; overflow:scroll">';
                                 echo '<table>';
                                 echo '<tr>';
                                 echo '<td colspan="2">'."<a class=\"generic-btn anchor-list-item\" href='article.php?content_id=".$row['content_id']."'>".$row['title']."</a>".'</td>';

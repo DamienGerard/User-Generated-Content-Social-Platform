@@ -2,7 +2,7 @@
    
 	require_once 'XML/Query2XML.php';
     
-    require_once "db_inc.php";
+    require_once "session_login.php";
    
 	//We use the factory design pattern to instantiate the object with the proper driver
     $query2xml = XML_Query2XML::factory($pdo);

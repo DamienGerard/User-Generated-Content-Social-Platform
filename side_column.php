@@ -13,11 +13,10 @@ echo '<div class="side-column">
     if($login){
         echo '<li><div class="generic-btn2" ><a href="history.php" class="anchor-list-item"><i class="fas fa-history"></i><span> History</span></a></div></li>
         <li><div class="generic-btn2" ><a href="#" class="anchor-list-item"><i class="far fa-bookmark"></i><span> Bookmarks</span></a></div></li>
-        <li><div class="generic-btn2" ><a href="like.php" class="anchor-list-item"><i class="far fa-thumbs-up"></i><span> Likes</span></a></div></li>
-        <li><div class="generic-btn2" ><a href="follow.php" class="anchor-list-item"><span>Follow</span></a></div></li>';
+        <li><div class="generic-btn2" ><a href="like.php" class="anchor-list-item"><i class="far fa-thumbs-up"></i><span> Likes</span></a></div></li>';
+        
     }
 echo '</ul>
 <hr>';
-
-
+echo "<h4>Followings</h4>";
 echo '</div>';

@@ -3,28 +3,31 @@
         <h3 style="text-align:center;">Interest</h4><hr style="border-color: black;">
         <div id="interest-tab-content" class="interest-tab-content">
             <?php
-            $url = file_get_contents('http://localhost/UniWebProject/interest_tab_xml.php?id='.$id);
-            
-            $dom = new DOMDocument;
-            $dom->preserveWhiteSpace = FALSE;
-            @$dom->load($url);
-           /* if($dom->schemaValidate('interest_tab.xsd')){
-                echo 'document is valid';
-                echo '<br>';
+            $url = 'http://localhost/UniWebProject/interest_tab_xml.php?id='.$id;
+            $xmlstr = file_get_contents($url);
+            //echo $xmlstr;
+            $dom = new DOMDocument();
+            //$dom->preserveWhiteSpace = FALSE;
+            @$dom->loadXML($xmlstr);
+            /*if($dom->schemaValidate('interest_tab.xsd')){
+                echo "document is valid";
             }
             else{
-                echo 'document is not valid';
+                echo "document is not valid";
             }*/
+           
             $interest_nodes = $dom->getElementsByTagName('interest');
             
 
                 foreach($interest_nodes as $interest_node){
+                    
                     $interest_id = $interest_node->getElementsByTagName('interest_id')[0]->nodeValue;
-                    $interest_name = $interest_node->getElementByTagName('name')[0]->nodeValue;
+                    $interest_name = $interest_node->getElementsByTagName('name')[0]->nodeValue;
+                    //echo $interest_name.'<br>';
                     $interest_picture = $interest_node->getElementsByTagName('picture')[0]->nodeValue;
                     $interest_description = $interest_node->getElementsByTagName('description')[0]->nodeValue;
 
-                    $interest_template = '<table id="'.$row['interest_id'].'" class="generic-btn" width="100%">
+                    $interest_template = '<table id="'.$interest_id.'" class="generic-btn" width="100%">
                                     <tr style="padding: 1px;">
                                         <td rowspan="2" style="padding: 1px;">
                                             <a class="anchor-list-item" href="interest.php?interest='.$interest_name.'"><img class="circle" src="'.$interest_picture.'" height="50px"></a>
@@ -39,8 +42,10 @@
                                     $interest_template =  $interest_template.'</tr>
                                     <tr style="padding: 1px;"><td style="padding: 1px; font-size:10px;">'.$interest_description.'</td></tr>
                                 </table>';
-                    echo $interest_template;
+                   echo $interest_template;
                 }
+            
+          
             ?>
             <script>
             function handleInterest(action, subjectType, subjectId, interestId){
@@ -59,8 +64,9 @@
                     xhr1.send();
                     
                     var xhr2 = new XMLHttpRequest();
-                    xhr2.open('GET', 'interest_tab_content.php?id=<?php echo $thisId; ?>'+'&subject_type='+subjectType, true);
+                    xhr2.open('GET', 'interest_tab_content.php?thisId=<?php echo $thisId; ?>&subject_type='+subjectType, true);
                     xhr2.onload = function(){
+                        console.log("helo");
                         document.getElementById('interest-tab-content').innerHTML=this.responseText;
                     }
                     xhr2.send();

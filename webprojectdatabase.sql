@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2020 at 07:30 PM
+-- Generation Time: May 01, 2020 at 10:40 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -45,6 +45,7 @@ INSERT INTO `account_sessions` (`session_id`, `account_id`, `login_time`) VALUES
 ('1i488155scobtvoms6181um5mt', 18, '2019-11-20 09:24:57'),
 ('677pha5878ed54m8oivf9cvcql', 13, '2019-11-12 16:06:45'),
 ('bkkl63igc1olem2kkndlgdeggj', 26, '2019-12-31 11:43:39'),
+('cbvac135hcfa97rqn9s5fi3ub3', 26, '2020-05-01 20:15:13'),
 ('eqdgp1sm8r26u3d68mbpcj5gip', 18, '2019-12-24 13:05:55'),
 ('g34k734e7s29gafndh07lv2p32', 18, '2020-01-30 19:30:11'),
 ('h395j1hnmr50kianen9u3buh9u', 18, '2020-01-08 11:03:44'),
@@ -218,9 +219,9 @@ INSERT INTO `content` (`content_id`, `user_id`, `title`, `date`, `marked`) VALUE
 (8, 18, ' Naruto vs Sasuke Full Fight', '2019-11-19', 0),
 (9, 18, 'What are some of the best ways to learn programming?', '2019-11-19', 0),
 (10, 18, 'What are some of the best ways to learn programming?', '2019-11-19', 0),
-(11, 18, 'Trees', '2019-11-20', 0),
+(11, 18, 'Trees', '2019-11-20', 1),
 (12, 24, 'What are some of the best ways to learn programming?', '2019-11-20', 0),
-(13, 24, 'What Makes for a Good Philosophical Argument, and The Common Ground Problem for Animal Consciousness', '2019-11-20', 0),
+(13, 24, 'What Makes for a Good Philosophical Argument, and The Common Ground Problem for Animal Consciousness', '2019-11-20', 1),
 (14, 25, 'Starry night', '2019-11-20', 0),
 (15, 26, 'How Mengzi Came up with Something Better Than the Golden Rule', '2019-11-20', 0),
 (16, 26, 'Hokages', '2019-11-20', 0),
@@ -228,20 +229,21 @@ INSERT INTO `content` (`content_id`, `user_id`, `title`, `date`, `marked`) VALUE
 (19, 18, 'Fascism', '2019-12-31', 0),
 (20, 18, 'Overestimating human responsibility', '2019-12-31', 0),
 (21, 18, 'Libra: Facebucks', '2019-12-31', 0),
-(22, 18, 'Data Driven', '2020-01-01', 0),
+(22, 18, 'Data Driven', '2020-01-01', 1),
 (23, 18, 'The Trolling Test', '2020-01-01', 0),
 (24, 18, 'CAT STEVENS - Wild World', '2020-01-01', 0),
 (25, 18, 'Nirvana - Smells Like Teen Spirit', '2020-01-01', 0),
-(26, 18, 'Bridge', '2020-01-01', 0),
-(32, 18, 'Stack Overflow is designed for practicing programmers', '2020-01-09', 0),
-(33, 18, 'Horror Joker', '2020-01-09', 0),
+(26, 18, 'Bridge', '2020-01-01', 1),
+(32, 18, 'Stack Overflow is designed for practicing programmers', '2020-01-09', 1),
+(33, 18, 'Horror Joker', '2020-01-09', 1),
 (34, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
 (35, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
-(36, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
+(36, 18, 'Naruto vs Third Raikage', '2020-01-09', 1),
 (37, 18, ' What is the best question and answer platform? Why?', '2020-01-09', 0),
 (38, 26, 'test', '2020-02-20', 1),
 (39, 26, 'test', '2020-02-20', 1),
-(40, 26, 'test', '2020-02-20', 1);
+(40, 26, 'test', '2020-02-20', 1),
+(41, 28, 'View', '2020-04-30', 1);
 
 -- --------------------------------------------------------
 
@@ -284,8 +286,18 @@ CREATE TABLE `follow` (
 INSERT INTO `follow` (`followed`, `follower`, `date_since`) VALUES
 (18, 24, '2019-12-24'),
 (18, 25, '2019-12-24'),
+(18, 26, '2020-04-30'),
 (24, 26, '2019-12-24'),
-(26, 18, '2019-12-24');
+(26, 18, '2019-12-24'),
+(26, 28, '2020-04-29'),
+(26, 29, '2020-04-30'),
+(26, 30, '2020-05-01'),
+(26, 31, '2020-05-01'),
+(26, 32, '2020-05-01'),
+(26, 33, '2020-05-01'),
+(26, 34, '2020-05-01'),
+(28, 26, '2020-04-30'),
+(29, 26, '2020-05-01');
 
 -- --------------------------------------------------------
 
@@ -305,8 +317,15 @@ CREATE TABLE `friend` (
 --
 
 INSERT INTO `friend` (`requestee`, `requestor`, `date_since`, `pending`) VALUES
-(18, 26, '2020-02-19', 1),
-(26, 18, '2019-12-25', 0);
+(18, 26, '2020-04-30', 1),
+(26, 18, '2019-12-25', 0),
+(26, 28, '2020-04-30', 0),
+(26, 29, '2020-05-01', 0),
+(26, 30, '2020-05-01', 0),
+(26, 31, '2020-05-01', 0),
+(26, 32, '2020-05-01', 0),
+(26, 33, '2020-05-01', 0),
+(26, 34, '2020-05-01', 1);
 
 -- --------------------------------------------------------
 
@@ -386,10 +405,21 @@ INSERT INTO `notification` (`notification_id`, `event_id`, `event_type`, `cause_
 (366, 812, 'comment_article', 26, 'user', '2020-01-10 00:00:00', 18, 1),
 (367, 817, 'like_video', 18, 'user', '2020-01-10 00:00:00', 18, 1),
 (368, 824, 'like_video', 18, 'user', '2020-01-11 00:00:00', 18, 0),
-(371, 0, 'friend', 26, 'user', '2020-02-19 00:00:00', 18, 0),
 (372, 38, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0),
 (373, 39, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0),
-(374, 40, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0);
+(374, 40, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0),
+(377, 0, 'follow', 28, 'user', '2020-04-29 00:00:00', 26, 1),
+(380, 0, 'friend', 26, 'user', '2020-04-30 00:00:00', 18, 0),
+(382, 0, 'follow', 26, 'user', '2020-04-30 00:00:00', 28, 0),
+(383, 0, 'follow', 26, 'user', '2020-04-30 00:00:00', 18, 0),
+(384, 0, 'follow', 29, 'user', '2020-04-30 00:00:00', 26, 1),
+(386, 0, 'follow', 31, 'user', '2020-05-01 00:00:00', 26, 1),
+(389, 0, 'follow', 32, 'user', '2020-05-01 00:00:00', 26, 1),
+(392, 0, 'follow', 30, 'user', '2020-05-01 00:00:00', 26, 1),
+(395, 0, 'follow', 33, 'user', '2020-05-01 00:00:00', 26, 1),
+(396, 0, 'friend', 34, 'user', '2020-05-01 00:00:00', 26, 1),
+(397, 0, 'follow', 34, 'user', '2020-05-01 00:00:00', 26, 1),
+(398, 0, 'follow', 26, 'user', '2020-05-01 00:00:00', 29, 0);
 
 -- --------------------------------------------------------
 
@@ -412,7 +442,8 @@ INSERT INTO `picture` (`picture_id`, `picture_path`) VALUES
 (7, 'content_image/5dd3581d4bd2b.jpg'),
 (11, 'content_image/5dd4bdbe20106.jpg'),
 (26, 'content_image/5e0cf5f3ac625.jpg'),
-(33, 'content_image/5e170ac1a940c.png');
+(33, 'content_image/5e170ac1a940c.png'),
+(41, 'content_image/5eaaa9f37ee4f.jpg');
 
 -- --------------------------------------------------------
 
@@ -449,6 +480,7 @@ CREATE TABLE `reported` (
 --
 
 INSERT INTO `reported` (`report_id`, `user_id`) VALUES
+(1, 26),
 (2, 26),
 (11, 26),
 (13, 26),
@@ -460,9 +492,14 @@ INSERT INTO `reported` (`report_id`, `user_id`) VALUES
 (32, 26),
 (33, 26),
 (36, 26),
+(38, 0),
 (38, 26),
+(38, 27),
+(38, 28),
 (39, 26),
-(40, 26);
+(39, 28),
+(40, 26),
+(41, 26);
 
 -- --------------------------------------------------------
 
@@ -505,7 +542,15 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_password`, `user_reg_time`, `u
 (23, 'JohnnyJohn', '$2y$10$2mua56OTEfAcKs3.sHLq1uWJpa6qMmtXUVP8AWvIhINUtn0BcDuoe', '2019-11-20 04:12:41', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
 (24, 'PersonaUno', '$2y$10$StuuEDQoi36KXSP7xZQ9Q.3krOhxPk2LrpPTRNWEl3qpHjjVc.xRK', '2019-11-20 04:17:14', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
 (25, 'PersonaDos', '$2y$10$gsv4dbkP4Bs5Nic4pIwAxOL6vH24E7FT/4A3GhhezOThjxmhr1fXO', '2019-11-20 04:43:55', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
-(26, 'nicolasmelanie', '$2y$10$HuusNoXASqTRrGIudXq/NeNT.J/UANKxRTmjyZ1LeWX6rL5l6m/6e', '2019-11-20 09:09:57', 1, 'uploads/picture/worldhistory.jpeg', 'Nicolas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', 'uploads/picture/5dd2cce27d0de.jpg');
+(26, 'nicolasmelanie', '$2y$10$HuusNoXASqTRrGIudXq/NeNT.J/UANKxRTmjyZ1LeWX6rL5l6m/6e', '2019-11-20 09:09:57', 1, 'uploads/picture/worldhistory.jpeg', 'Nicolas', 'Melanie', 'Life is an adventure', '1999-02-17', 'Computer Science Year 2', 'uploads/picture/5dd2cce27d0de.jpg'),
+(27, 'melanienicolas', '$2y$10$sKCdVfzZG977cgnepl6ZeejOai75rGF5jAJ1z67LKSkSGsr6FlPhC', '2020-02-22 19:48:26', 1, 'uploads/picture/5e51858a97c6d.jpg', 'melanie', 'nicolas', 'student', '1998-12-30', 'education', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(28, 'oliviermelanie', '$2y$10$4IhkECTA/lnQ1otOqqlhbebgHR3S4yE/DW9eGHOzFptxMgclewAfW', '2020-04-29 14:51:09', 1, 'uploads/picture/5ea99493d0b53.jpg', 'Vincent', 'Melanie', 'I was born in 1998', '1998-05-20', 'I study', 'uploads/picture/5ea99493d027e.jpg'),
+(29, 'alphabeta', '$2y$10$UNNpuCEyyQH8WMjx34oYNO/ZonU48Kg15e19bOL9pu4RMaZqZnLN.', '2020-04-30 17:10:24', 1, 'uploads/picture/5eab06cfb7cd2.png', 'alpha', 'beta', 'simple', '1995-07-13', 'I study economics', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(30, 'betacharlie', '$2y$10$t7PUHn1btvu/PZUtJDRXVeDZUqbadV2S.APVB36KrZM6iKgKR6JfG', '2020-05-01 10:00:16', 1, 'uploads/picture/5eabf33e9e98e.png', 'beta', 'charlie', 'i work in finance', '2000-01-01', 'UOM', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(31, 'charliedelta', '$2y$10$jIoNEpQyCNxVuS0IgX.R7uZwlzOJpYb3aYFGZ1k0QWZ0Bg1Jnma6K', '2020-05-01 10:02:06', 1, 'uploads/picture/5eabf3b1c228c.png', 'charlie', 'delta', 'I am friendly', '1990-02-02', 'UTM', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(32, 'deltaecho', '$2y$10$UHK43/ipkgEDmwazEdbVV.JMw6rxmBY41Ec6Prm2hbyOlSSBq4Mhm', '2020-05-01 10:04:09', 1, 'uploads/picture/5eabf42707b72.png', 'delta', 'echo', 'I am Mauritian', '1991-03-03', 'UDM', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(33, 'echofoxtrot', '$2y$10$E59LcwK73cnAqWw/eNjuUevsjSRi4qpGURGjF.NXF5bdEarrREbIS', '2020-05-01 10:11:55', 1, 'uploads/picture/5eabf5fa390c5.png', 'echo', 'foxtrot', 'I am a teacher', '1994-04-04', 'UOM', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'),
+(34, 'foxtrotgolf', '$2y$10$ayRXy8HLURw7lquxG.DCwewwJ2.NJ8F3NmadLcZDoy6mZgPFiHoum', '2020-05-01 10:13:29', 1, 'uploads/picture/5eabf656aafd5.png', 'foxtrot', 'golf', 'I am a singer', '1995-05-05', 'Melbourne School of music', 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg');
 
 -- --------------------------------------------------------
 
@@ -528,14 +573,11 @@ INSERT INTO `user_interest` (`interest_id`, `user_id`) VALUES
 (5, 18),
 (12, 18),
 (4, 18),
-(5, 26),
-(4, 26),
-(12, 26),
-(15, 26),
 (1, 18),
 (14, 18),
-(1, 26),
-(14, 26);
+(3, 26),
+(5, 26),
+(12, 26);
 
 -- --------------------------------------------------------
 
@@ -591,11 +633,15 @@ INSERT INTO `view` (`view_id`, `date`, `user_id`, `content_id`) VALUES
 (812, '2020-01-10 09:26:03', 26, 4),
 (817, '2020-01-10 09:28:25', 18, 25),
 (819, '2020-01-11 13:57:02', 18, 32),
-(821, '2020-02-19 20:57:34', 26, 32),
+(821, '2020-04-30 12:19:39', 26, 32),
 (823, '2020-01-11 14:00:06', 26, 36),
 (824, '2020-01-11 14:30:59', 18, 24),
 (825, '2020-01-30 20:38:11', 18, 19),
-(830, '2020-02-19 21:13:06', 26, 22);
+(830, '2020-04-30 11:01:57', 26, 22),
+(831, '2020-04-29 17:57:45', 26, 15),
+(832, '2020-04-29 17:58:06', 26, 21),
+(835, '2020-04-30 12:35:50', 28, 41),
+(836, '2020-04-30 19:55:41', 26, 41);
 
 --
 -- Indexes for dumped tables
@@ -725,7 +771,7 @@ ALTER TABLE `question`
 -- Indexes for table `reported`
 --
 ALTER TABLE `reported`
-  ADD PRIMARY KEY (`report_id`);
+  ADD PRIMARY KEY (`report_id`,`user_id`);
 
 --
 -- Indexes for table `share`
@@ -782,7 +828,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `interest`
@@ -794,19 +840,19 @@ ALTER TABLE `interest`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=399;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `view`
 --
 ALTER TABLE `view`
-  MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=831;
+  MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=837;
 
 --
 -- Constraints for dumped tables

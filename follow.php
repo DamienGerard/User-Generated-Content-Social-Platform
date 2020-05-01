@@ -317,6 +317,7 @@ $json2 = json_decode(file_get_contents($url2));
                     
                     <div id="content1">
                         <?php
+                        if($json1){
                         foreach($json1 as $follower){
                             $followerfname = $follower->f_name;
                         
@@ -340,11 +341,12 @@ $json2 = json_decode(file_get_contents($url2));
                                 echo '</table>';
                                 echo '</div>';
                                 echo '<br><br>';
-                        }
+                        }}
                         ?>
                     </div>
                     <div id="content2">
                     <?php
+                    if($json2){
                         foreach($json2 as $following){
                             $followingfname = $following->f_name;
                         
@@ -362,13 +364,13 @@ $json2 = json_decode(file_get_contents($url2));
                                 echo '<td><a class="generic-btn anchor-list-item" href="user_profile.php?user='.$followingUsername.'"><p>'.$followingfname.' '.$followinglname.'</p></a></td>';
                                 echo '</tr>';
                                 echo '<tr>';
-                                echo "<td>".$followerDate."</td>";
+                                echo "<td>".$followingDate."</td>";
                                 echo '</tr>';
                                
                                 echo '</table>';
                                 echo '</div>';
                                 echo '<br><br>';
-                        }
+                        }}
                         ?>
                     </div>
                     </div>

@@ -10,13 +10,13 @@ if(isset($_GET["id"])){
     $id = $_GET["id"];
 }
 
-$query = "SELECT user.f_name,user.l_name,user.profile_pic,follow.date_since,user.user_name,user.self_description FROM user INNER JOIN follow on user.user_id=follow.follower WHERE follow.followed=".$id;
+$query = "SELECT user.f_name,user.l_name,user.profile_pic,friend.date_since,user.user_name,user.self_description FROM user INNER JOIN friend on user.user_id=friend.requestor WHERE friend.requestee=".$id." AND friend.pending=0";
 
 $result = $pdo->query($query);
 
-$followers = $result->fetchAll(PDO::FETCH_ASSOC);
+$friends = $result->fetchAll(PDO::FETCH_ASSOC);
 
-$data = json_encode($followers);
+$data = json_encode($friends);
 //header('Content-Type: application/json'); 
 $data1 = json_decode($data);
 

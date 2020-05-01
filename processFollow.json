@@ -20,7 +20,7 @@
             },
             "profile_pic":{
                 "type":"string",
-                "minLength":1,
+                "minLength":0,
                 "maxLength":50
             },
             "date_since":{
@@ -30,9 +30,14 @@
                 "type":"string",
                 "minLength":1,
                 "maxLength":255
+            },
+            "self_description":{
+                "type":"string",
+                "minLength":1,
+                "maxLength":255
             }
         },
-        "required":["f_name","l_name","profile_pic","date_since","user_name"],
+        "required":["f_name","l_name","profile_pic","date_since","user_name","self_description"],
         "additionalProperties":false
     },
     "additionalProperties":false
