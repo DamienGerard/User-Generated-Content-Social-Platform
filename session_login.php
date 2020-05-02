@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if(session_status()!==PHP_SESSION_ACTIVE){
+        session_start();
+    }
     require './db_inc.php';
     require './account_class.php';
                  
@@ -31,13 +33,14 @@
         }
 
         $row = $res->fetch(PDO::FETCH_ASSOC);
-        
+        $id = $row['user_id'];
         $fname = $row['f_name'];
         $lname = $row['l_name'];
         $self_description = $row['self_description'];
         $dob = $row['DOB'];
         $education = $row['education'];
         $profile_pic1 = $row['profile_pic'];
+        $cover_pic = $row['cover_pic'];
     }
     else
     {

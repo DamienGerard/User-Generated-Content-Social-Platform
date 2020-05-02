@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/NotificationElement"
+    },
+    "definitions": {
+        "NotificationElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "cause_username": {
+                    "type": "string"
+                },
+                "cause_pic": {
+                    "type": "string"
+                },
+                "main_width": {
+                    "type": "integer"
+                },
+                "notif_main": {
+                    "type": "string"
+                },
+                "new_notif": {
+                    "type": "string"
+                },
+                "notif_date": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cause_pic",
+                "cause_username",
+                "main_width",
+                "new_notif",
+                "notif_date",
+                "notif_main"
+            ],
+            "title": "NotificationElement"
+        }
+    }
+}

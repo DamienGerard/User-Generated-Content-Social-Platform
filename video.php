@@ -1,9 +1,10 @@
-<?php include 'session_login.php';?>
+<?php include 'session_login.php';
+    include 'admin/admin_session_login.php';?>
 
 <?php
     if (isset($_GET['content_id'])) {
         $content_id = $_GET['content_id'];
-        $query = "SELECT content.title, content.date, video.video_path, video.thumbnail_path, user.user_id, user.user_name, user.f_name, user.l_name, user.profile_pic FROM webprojectdatabase.content INNER JOIN webprojectdatabase.video ON content.content_id = video.video_id INNER JOIN webprojectdatabase.user ON content.user_id = user.user_id WHERE content.content_id=".$content_id;
+        $query = "SELECT content.title, content.date, video.video_path, video.thumbnail_path, user.user_id, user.user_name, user.f_name, user.l_name, user.profile_pic FROM webprojectdatabase.content INNER JOIN webprojectdatabase.video ON content.content_id = video.video_id INNER JOIN webprojectdatabase.user ON content.user_id = user.user_id WHERE content.marked=0 AND content.content_id=".$content_id;
 
         try {
             $res = $pdo->prepare($query);
@@ -73,8 +74,7 @@
                 echo "<br><br>";
                 echo "<h6>$content_date</h6>";
                 echo '<a href="user_profile.php?user='.$username.'"><img src="'.$user_pic.'" alt="images/user_icon.png" width="75"></a>';
-                echo '<a class="anchor-list-item" href="user_profile.php?user='.$username.'"><p>'.$user_fname.'</p></a>';
-                echo '<a class="anchor-list-item" href="user_profile.php?user='.$username.'"><p>'.$user_lname.'</p></a>';
+                echo '<a href="user_profile.php?user='.$username.'"><p>'.$user_fname.' '.$user_lname.'</p></a>';
                 echo "<br><br><br>";
                 $path_parts = pathinfo($row['video_path']);
                 echo '<video width="680" heigth="500" controls poster="'.$thumbnail.'">';

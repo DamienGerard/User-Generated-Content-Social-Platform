@@ -29,6 +29,7 @@ class Account{
         }
         
         if (!is_null($this->getIdFromName($name))){
+            
             throw new Exception('User name not available');
         }
         

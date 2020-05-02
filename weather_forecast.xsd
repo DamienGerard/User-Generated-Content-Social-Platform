@@ -1,0 +1,117 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="location">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:string" name="region"/>
+              <xs:element type="xs:string" name="country"/>
+              <xs:element type="xs:float" name="lat"/>
+              <xs:element type="xs:float" name="lon"/>
+              <xs:element type="xs:string" name="tz_id"/>
+              <xs:element type="xs:int" name="localtime_epoch"/>
+              <xs:element type="xs:string" name="localtime"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="current">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="last_updated_epoch"/>
+              <xs:element type="xs:string" name="last_updated"/>
+              <xs:element type="xs:float" name="temp_c"/>
+              <xs:element type="xs:float" name="temp_f"/>
+              <xs:element type="xs:float" name="is_day"/>
+              <xs:element name="condition">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="text"/>
+                    <xs:element type="xs:string" name="icon"/>
+                    <xs:element type="xs:short" name="code"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="wind_mph"/>
+              <xs:element type="xs:float" name="wind_kph"/>
+              <xs:element type="xs:short" name="wind_degree"/>
+              <xs:element type="xs:string" name="wind_dir"/>
+              <xs:element type="xs:short" name="pressure_mb"/>
+              <xs:element type="xs:float" name="pressure_in"/>
+              <xs:element type="xs:float" name="precip_mm"/>
+              <xs:element type="xs:float" name="precip_in"/>
+              <xs:element type="xs:float" name="humidity"/>
+              <xs:element type="xs:float" name="cloud"/>
+              <xs:element type="xs:float" name="feelslike_c"/>
+              <xs:element type="xs:float" name="feelslike_f"/>
+              <xs:element type="xs:float" name="vis_km"/>
+              <xs:element type="xs:float" name="vis_miles"/>
+              <xs:element type="xs:float" name="uv"/>
+              <xs:element type="xs:float" name="gust_mph"/>
+              <xs:element type="xs:float" name="gust_kph"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="forecast">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="forecastday" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:date" name="date"/>
+                    <xs:element type="xs:int" name="date_epoch"/>
+                    <xs:element name="day">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:float" name="maxtemp_c"/>
+                          <xs:element type="xs:float" name="maxtemp_f"/>
+                          <xs:element type="xs:float" name="mintemp_c"/>
+                          <xs:element type="xs:float" name="mintemp_f"/>
+                          <xs:element type="xs:float" name="avgtemp_c"/>
+                          <xs:element type="xs:float" name="avgtemp_f"/>
+                          <xs:element type="xs:float" name="maxwind_mph"/>
+                          <xs:element type="xs:float" name="maxwind_kph"/>
+                          <xs:element type="xs:float" name="totalprecip_mm"/>
+                          <xs:element type="xs:float" name="totalprecip_in"/>
+                          <xs:element type="xs:float" name="avgvis_km"/>
+                          <xs:element type="xs:float" name="avgvis_miles"/>
+                          <xs:element type="xs:float" name="avghumidity"/>
+                          <xs:element type="xs:float" name="daily_will_it_rain"/>
+                          <xs:element type="xs:float" name="daily_chance_of_rain"/>
+                          <xs:element type="xs:float" name="daily_will_it_snow"/>
+                          <xs:element type="xs:float" name="daily_chance_of_snow"/>
+                          <xs:element name="condition">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="text"/>
+                                <xs:element type="xs:string" name="icon"/>
+                                <xs:element type="xs:short" name="code"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element type="xs:float" name="uv"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="astro">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="sunrise"/>
+                          <xs:element type="xs:string" name="sunset"/>
+                          <xs:element type="xs:string" name="moonrise"/>
+                          <xs:element type="xs:string" name="moonset"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="alert"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

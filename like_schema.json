@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Like",
+    "definitions": {
+        "Like": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "content_id": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "content_type": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "view_id": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "liker_id": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "content_id",
+                "content_type",
+                "type",
+                "user_id",
+                "view_id",
+                "liker_id"
+            ],
+            "title": "Like"
+        }
+    }
+}

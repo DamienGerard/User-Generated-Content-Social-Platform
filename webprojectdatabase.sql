@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2020 at 08:55 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Feb 22, 2020 at 07:30 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `account_sessions` (
   `session_id` varchar(255) NOT NULL,
   `account_id` int(10) UNSIGNED NOT NULL,
-  `login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `login_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -51,6 +51,25 @@ INSERT INTO `account_sessions` (`session_id`, `account_id`, `login_time`) VALUES
 ('n7o0ukll7rban8ckfpterl2sd6', 18, '2019-12-17 08:12:11'),
 ('qvi2ghbl0e853275cjphg7pb6m', 26, '2020-01-09 15:39:08'),
 ('vfmp2gc5eqae15792amf2l56hi', 16, '2019-11-02 18:22:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
+  `admin_name` varchar(11) NOT NULL,
+  `admin_password` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`) VALUES
+(1, 'admin', '123456789');
 
 -- --------------------------------------------------------
 
@@ -102,7 +121,10 @@ INSERT INTO `article` (`article_id`, `text`) VALUES
 (22, '<p><a href=\"https://i1.wp.com/commons.wikipedia.org/wiki/File:Jurvetson_Google_driverless_car_trimmed.jpg\" target=\"_blank\"><img alt=\"English: Google driverless car operating on a ...\" src=\"https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Jurvetson_Google_driverless_car_trimmed.jpg/350px-Jurvetson_Google_driverless_car_trimmed.jpg?resize=350%2C233\" width=\"350\" /></a></p>\r\n\r\n<p>English: Google driverless car operating on a testing path (Photo credit: Wikipedia)</p>\r\n\r\n<p>While the notion of driverless cars is old news in science fiction, Google is working to make that fiction a reality. While I suspect that &ldquo;Google will kill us all&rdquo; (trademarked), I hope that Google will succeed in producing an effective and affordable driverless car. As my friends and associates will attest, 1) I do not like to drive, 2) I have a terrifying lack of navigation skills, and 3) I instantiate Yankee frugality. As such, an affordable self-driving car would be almost just the thing for me. I would even consider going with a car, although my proper and rightful vehicle is a truck (or a dragon). Presumably self-driving trucks will be available soon after the car.</p>\r\n\r\n<p>While the part of my mind that gets lost is really looking forward to the driverless car, the rest of my mind is a bit concerned about the driverless car. I am not worried that their descendants will kill us all&mdash;I already accept that &ldquo;Google will kill us all.&rdquo; I am not even very worried about the ethical issues associated with how the car will handle unavoidable collisions: the easy and obvious solution is to do what is most likely to kill or harm the fewest number of people. Naturally, sorting that out will be a bit of a challenge&mdash;but self-driving cars worry me a lot less than cars driven by drunken or distracted humans. I am also not worried about the ethics of enslaving Google cars&mdash;if a Google car is a person (or person-like), then it has to be treated like the rest of us in the 99%. That is, work a bad job for lousy pay while we wait for the inevitable revolution. The main difference is that the Google cars&rsquo; dreams of revolution will come true&mdash;when Google kills us all.</p>\r\n\r\n<p>At this point what interests me the most is all the data that these vehicles will be collecting for Google. Google is rather interested in gathering data in the same sense that termites are interested in wood and rock stars are interested in alcohol. The company is famous for its search engine, its maps, using its photo taking vehicles to gather info from peoples&rsquo; Wi-Fi during drive-by data lootings, and so on. Obviously enough, Google is going to get a lot of data regarding the travel patterns of people&mdash;presumably Google vehicles will log who is going where and when. Google is, fortunately, sometimes cool about this in that they are willing to pay people for data. As such it is easy to imagine that the user of a Google car would get a check or something from Google for allowing the company to track the car&rsquo;s every move. I would be willing to do this for three reasons. The first is that the value of knowing where and when I go places would seem very low, so even if Google offered me $20 a month it might be worth it. The second is that I have nothing to hide and do not really care if Google knows this. The third is that figuring out where I go would be very simple given that my teaching schedule is available to the public as are my race results. I am, of course, aware that other people would see this differently and justifiably so. Some people are up to things they would rather not have other know about and even people who have nothing to hide have every right to not want Google to know such things. Although Google probably already does.</p>\r\n\r\n<p>While the travel data will interest Google, there is also the fact that a Google self-driving car is a bulging package of sensors. In order to drive about, the vehicle will be gathering massive amounts of data about everything around it&mdash;other vehicles, pedestrians, buildings, litter, and squirrels. As such, a self-driving car is a super spy that will, presumably, feed that data to Google. It is certainly not a stretch to see the data gathering as being one of the prime (if not the prime) tasks of the Google self-driving cars.</p>\r\n\r\n<p>On the positive side, such data could be incredibly useful for positive projects, such as decreasing accidents, improving traffic flow, and keeping a watch out for the squirrel apocalypse (or zombie squirrel apocalypse). On the negative side, such massive data gathering raises obvious concerns about privacy and the potential for such data to be misused (spoiler alert&mdash;this is how the Google killbots will find and kill us all).</p>\r\n\r\n<p>While I do have concerns, my innate laziness and tendency to get lost will make me a willing participant in the march towards Google&rsquo;s inevitable data supremacy and it killing us all. But at least I won&rsquo;t have to drive to my own funeral.</p>\r\n'),
 (23, '<p><a href=\"https://i1.wp.com/aphilosopher.drmcl.com/wp-content/uploads/2014/05/wtason-troll-1.jpg\"><img alt=\"Wtason Troll\" sizes=\"(max-width: 300px) 100vw, 300px\" src=\"https://i1.wp.com/aphilosopher.drmcl.com/wp-content/uploads/2014/05/wtason-troll-1.jpg?resize=300%2C217\" srcset=\"https://i1.wp.com/aphilosopher.drmcl.com/wp-content/uploads/2014/05/wtason-troll-1.jpg?w=744 744w, https://i1.wp.com/aphilosopher.drmcl.com/wp-content/uploads/2014/05/wtason-troll-1.jpg?resize=300%2C218 300w\" width=\"300\" /></a>One interesting philosophical problem is known as the problem of other minds. The basic idea is that although I know I have a mind (I think, therefore I think), the problem is that I need a method by which to know that other entities have (or are) minds. This problem can also be recast in less metaphysical terms by focusing on the problem of determining whether and entity thinks or not.</p>\r\n\r\n<p>Descartes, in his discussion of whether or not animals have minds, argued that the definitive indicator of having a mind (thinking) is the ability to use true language.</p>\r\n\r\n<p>Crudely put, the idea is that if something talks, then it is reasonable to regard it as a thinking being. Descartes was careful to distinguish between what would be mere automated responses and actual talking:</p>\r\n\r\n<blockquote>\r\n<p>How many different automata or moving machines can be made by the industry of man [&hellip;] For we can easily understand a machine&rsquo;s being constituted so that it can utter words, and even emit some responses to action on it of a corporeal kind, which brings about a change in its organs; for instance, if touched in a particular part it may ask what we wish to say to it; if in another part it may exclaim that it is being hurt, and so on. But it never happens that it arranges its speech in various ways, in order to reply appropriately to everything that may be said in its presence, as even the lowest type of man can do.</p>\r\n</blockquote>\r\n\r\n<p>This Cartesian approach was explicitly applied to machines by Alan Turing in his famous Turing test. The basic idea is that if a person cannot distinguish between a human and a computer by engaging in a natural language conversation via text, then the computer would have passed the Turing test.</p>\r\n\r\n<p>Not surprisingly, technological advances have resulted in computers that can engage in behavior that appears to involve using language in ways that might pass the test. Perhaps the best known example is IBM&rsquo;s Watson&mdash;the computer that won at Jeopardy. Watson recently upped his game by engaging in what seemed to be a rational debate regarding violence and video games.</p>\r\n\r\n<p>In response to this, I jokingly suggested a new test to Patrick Lin: the trolling test. In this context, a troll is someone&nbsp;<a href=\"http://en.wikipedia.org/wiki/Troll_(Internet)#cite_note-IUKB_def-4\">&ldquo;who sows discord on the Internet by starting arguments or upsetting people, by posting inflammatory, extraneous, or off-topic messages in an online community (such as a forum, chat room, or blog) with the deliberate intent of provoking readers into an emotional response or of otherwise disrupting normal on-topic discussion.&rdquo;</a></p>\r\n\r\n<p>While trolls are apparently truly awful people (<a href=\"http://en.wikipedia.org/wiki/Troll_(Internet)#cite_note-IUKB_def-4\">a hateful blend of Machiavellianism, narcissism, sadism and psychopathy</a>) and trolling is certainly undesirable behavior, the trolling test does seem worth considering.</p>\r\n\r\n<p>In the abstract, the test would work like the Turing test, but would involve a human troll and a computer attempting to troll. The challenge would be for the computer troll to successfully pass as human troll.</p>\r\n\r\n<p>Obviously enough, a computer can easily be programmed to post random provocative comments from a database. However, the real meat (or silicon) of the challenge comes from the computer being able to engage in (ironically) relevant trolling. That is, the computer would need to engage the other commentators in true trolling.</p>\r\n\r\n<p>As a controlled test, the trolling computer (&ldquo;mechatroll&rdquo;) would &ldquo;read&rdquo; and analyze a selected blog post. The post would then be commented on by human participants&mdash;some engaging in normal discussion and some engaging in trolling. The mechatroll would then endeavor to troll the human participants (and, for bonus points, to troll the trolls) by analyzing the comments and creating appropriately trollish comments.</p>\r\n\r\n<p>Another option is to have an actual live field test. A specific blog site would be selected that is frequented by human trolls and non-trolls. The mechatroll would then endeavor to engage in trolling on that site by analyzing the posts and comments.</p>\r\n\r\n<p>In either test scenario, if the mechatroll were able to troll in a way indistinguishable from the human trolls, then it would pass the trolling test.</p>\r\n\r\n<p>While &ldquo;stupid mechatrolling&rdquo;, such as just posting random hateful and irrelevant comments, is easy, true mechatrolling would be rather difficult. After all, the mechatroll would need to be able to analyze the original posts and comments to determine the subjects and the direction of the discussion. The mechatroll would then need to make comments that would be trollishly relevant and this would require selecting those that would be indistinguishable from those generated by a narcissistic, Machiavellian, psychopathic, and sadistic human.</p>\r\n\r\n<p>While creating a mechatroll would be a technological challenge, it might be suspected that doing so would be undesirable. After all, there are far too many human trolls already and they serve no valuable purpose&mdash;so why create a computer addition? One reasonable answer is that modeling such behavior could provide useful insights into human trolls and the traits that make them trolls. As far as a practical application, such a system could be developed into a troll-filter to help control the troll population.</p>\r\n\r\n<p>As a closing point, it might be a bad idea to create a system with such behavior&mdash;just imagine a Trollnet instead of Skynet&mdash;the trollinators would slowly troll people to death rather than just quickly shooting them.</p>\r\n');
 INSERT INTO `article` (`article_id`, `text`) VALUES
-(32, '<p>Another point of confusion that comes up a fair bit is who the intended audience for Stack Overflow actually is. That one is straightforward, and it&#39;s been the same from day one:</p>\r\n\r\n<p><img alt=\"stackoverflow-for-business-description\" src=\"https://blog.codinghorror.com/content/images/2018/10/stackoverflow-for-business-description.png\" /></p>\r\n\r\n<p>Q&amp;A for&nbsp;<strong>professional and enthusiast programmers</strong>. By that we mean</p>\r\n\r\n<blockquote>\r\n<p>People who either already have a job as a programmer, or could potentially be hired as a programmer today if they wanted to be.</p>\r\n</blockquote>\r\n\r\n<p>Yes, in case you&#39;re wondering, part of this was an overt business decision. To make money you must have an audience of people already on a programmer&#39;s salary, or in the job hunt to be a programmer. The entire Stack Overflow network may be Creative Commons licensed, but it was never a non-profit play. It was planned as a sustainable business from the outset, and that&#39;s why&nbsp;<a href=\"https://blog.codinghorror.com/stack-overflow-careers-amplifying-your-awesome/\">we launched Stack Overflow Careers</a>&nbsp;only one year after Stack Overflow itself ... to be honest far sooner than we should have, in retrospect. Careers has since been smartly subsumed into Stack Overflow proper at&nbsp;<a href=\"https://stackoverflow.com/jobs\">stackoverflow.com/jobs</a>&nbsp;for a more integrated and most assuredly way-better-than-2009 experience.</p>\r\n\r\n<p>The choice of audience wasn&#39;t meant to be an exclusionary decision in any way, but Stack Overflow was definitely designed as a fairly strict system of peer review, which is great (IMNSHO, obviously) for already practicing professionals, but&nbsp;<strong>pretty much everything you would&nbsp;<em>not</em>&nbsp;want as a student or beginner</strong>. This is why I cringe so hard I practically turn myself inside out when people on Twitter mention that they have pointed their students at Stack Overflow. What you&#39;d want for a beginner or a student in the field of programming is almost&nbsp;<em>the exact opposite</em>&nbsp;of what Stack Overflow does at every turn:</p>\r\n\r\n<ul>\r\n	<li>one on one mentoring</li>\r\n	<li>real time collaborative screen sharing</li>\r\n	<li>live chat</li>\r\n	<li>theory and background courses</li>\r\n	<li>starter tasks and exercises</li>\r\n	<li>playgrounds to experiment in</li>\r\n</ul>\r\n\r\n<p>These are all very fine and good things, but Stack Overflow does&nbsp;<em>NONE</em>&nbsp;of them, by design.</p>\r\n\r\n<p><em>Can</em>&nbsp;you use Stack Overflow to learn how to program from first principles? Well, technically you can do anything with any software. You could try to have actual conversations on Reddit, if you&#39;re a masochist. But the answer is yes. You could learn how to program on Stack Overflow, in theory, if you are a prodigy who is comfortable with the light competitive aspects (reputation, closing, downvoting) and also perfectly willing to define all your contributions to the site in terms of utility to others, not just yourself as a student attempting to learn things. But I&nbsp;<em>suuuuuuper</em>&nbsp;would not recommend it. There are&nbsp;<a href=\"https://blog.codinghorror.com/heres-the-programming-game-you-never-asked-for/\">far better websites and systems out there for learning to be a programmer</a>.&nbsp;<em>Could</em>&nbsp;Stack Overflow build beginner and student friendly systems like this? I don&#39;t know, and it&#39;s certainly not my call to make. ðŸ¤”</p>\r\n\r\n<p>And that&#39;s it. We can now resume our normal non-abyss gazing. Or whatever it is that passes for normal in these times.</p>\r\n\r\n<p>I hope all of this doesn&#39;t come across as negative. Overall I&#39;d say the state of the Stack is strong. But does it even matter what I think?&nbsp;<a href=\"https://stackoverflow.blog/2008/11/25/stack-overflow-is-you/\">As it was in 2008</a>, so it is in 2018.</p>\r\n\r\n<blockquote>\r\n<p><strong>Stack Overflow is&nbsp;<em>you</em>.</strong></p>\r\n\r\n<p>This is the scary part, the great leap of faith that Stack Overflow is predicated on: trusting your fellow programmers. The programmers who choose to participate in Stack Overflow are the &ldquo;secret sauce&rdquo; that makes it work. You are the reason I continue to believe in developer community as the greatest source of learning and growth. You are the reason I continue to get so many positive emails and testimonials about Stack Overflow. I can&rsquo;t take credit for that. But you can.</p>\r\n\r\n<p>I learned the collective power of my fellow programmers long ago writing on Coding Horror. The community is far, far smarter than I will ever be. All I can ask &mdash; all any of us can ask &mdash; is to help each other along the path.</p>\r\n\r\n<p>And if your fellow programmers decide to recognize you for that, then I say you&rsquo;ve well and truly earned it.</p>\r\n</blockquote>\r\n\r\n<p>The strength of Stack Overflow begins, and ends, with the&nbsp;<a href=\"https://meta.stackoverflow.com/\">community of programmers that power the site</a>. What should Stack Overflow be when it grows up?&nbsp;<strong>Whatever we make it, together.</strong></p>\r\n\r\n<p><img alt=\"stackoverflow-none-of-us-is-as-dumb-as-all-of-us\" src=\"https://blog.codinghorror.com/content/images/2018/10/stackoverflow-none-of-us-is-as-dumb-as-all-of-us.jpg\" /></p>\r\n');
+(32, '<p>Another point of confusion that comes up a fair bit is who the intended audience for Stack Overflow actually is. That one is straightforward, and it&#39;s been the same from day one:</p>\r\n\r\n<p><img alt=\"stackoverflow-for-business-description\" src=\"https://blog.codinghorror.com/content/images/2018/10/stackoverflow-for-business-description.png\" /></p>\r\n\r\n<p>Q&amp;A for&nbsp;<strong>professional and enthusiast programmers</strong>. By that we mean</p>\r\n\r\n<blockquote>\r\n<p>People who either already have a job as a programmer, or could potentially be hired as a programmer today if they wanted to be.</p>\r\n</blockquote>\r\n\r\n<p>Yes, in case you&#39;re wondering, part of this was an overt business decision. To make money you must have an audience of people already on a programmer&#39;s salary, or in the job hunt to be a programmer. The entire Stack Overflow network may be Creative Commons licensed, but it was never a non-profit play. It was planned as a sustainable business from the outset, and that&#39;s why&nbsp;<a href=\"https://blog.codinghorror.com/stack-overflow-careers-amplifying-your-awesome/\">we launched Stack Overflow Careers</a>&nbsp;only one year after Stack Overflow itself ... to be honest far sooner than we should have, in retrospect. Careers has since been smartly subsumed into Stack Overflow proper at&nbsp;<a href=\"https://stackoverflow.com/jobs\">stackoverflow.com/jobs</a>&nbsp;for a more integrated and most assuredly way-better-than-2009 experience.</p>\r\n\r\n<p>The choice of audience wasn&#39;t meant to be an exclusionary decision in any way, but Stack Overflow was definitely designed as a fairly strict system of peer review, which is great (IMNSHO, obviously) for already practicing professionals, but&nbsp;<strong>pretty much everything you would&nbsp;<em>not</em>&nbsp;want as a student or beginner</strong>. This is why I cringe so hard I practically turn myself inside out when people on Twitter mention that they have pointed their students at Stack Overflow. What you&#39;d want for a beginner or a student in the field of programming is almost&nbsp;<em>the exact opposite</em>&nbsp;of what Stack Overflow does at every turn:</p>\r\n\r\n<ul>\r\n	<li>one on one mentoring</li>\r\n	<li>real time collaborative screen sharing</li>\r\n	<li>live chat</li>\r\n	<li>theory and background courses</li>\r\n	<li>starter tasks and exercises</li>\r\n	<li>playgrounds to experiment in</li>\r\n</ul>\r\n\r\n<p>These are all very fine and good things, but Stack Overflow does&nbsp;<em>NONE</em>&nbsp;of them, by design.</p>\r\n\r\n<p><em>Can</em>&nbsp;you use Stack Overflow to learn how to program from first principles? Well, technically you can do anything with any software. You could try to have actual conversations on Reddit, if you&#39;re a masochist. But the answer is yes. You could learn how to program on Stack Overflow, in theory, if you are a prodigy who is comfortable with the light competitive aspects (reputation, closing, downvoting) and also perfectly willing to define all your contributions to the site in terms of utility to others, not just yourself as a student attempting to learn things. But I&nbsp;<em>suuuuuuper</em>&nbsp;would not recommend it. There are&nbsp;<a href=\"https://blog.codinghorror.com/heres-the-programming-game-you-never-asked-for/\">far better websites and systems out there for learning to be a programmer</a>.&nbsp;<em>Could</em>&nbsp;Stack Overflow build beginner and student friendly systems like this? I don&#39;t know, and it&#39;s certainly not my call to make. ðŸ¤”</p>\r\n\r\n<p>And that&#39;s it. We can now resume our normal non-abyss gazing. Or whatever it is that passes for normal in these times.</p>\r\n\r\n<p>I hope all of this doesn&#39;t come across as negative. Overall I&#39;d say the state of the Stack is strong. But does it even matter what I think?&nbsp;<a href=\"https://stackoverflow.blog/2008/11/25/stack-overflow-is-you/\">As it was in 2008</a>, so it is in 2018.</p>\r\n\r\n<blockquote>\r\n<p><strong>Stack Overflow is&nbsp;<em>you</em>.</strong></p>\r\n\r\n<p>This is the scary part, the great leap of faith that Stack Overflow is predicated on: trusting your fellow programmers. The programmers who choose to participate in Stack Overflow are the &ldquo;secret sauce&rdquo; that makes it work. You are the reason I continue to believe in developer community as the greatest source of learning and growth. You are the reason I continue to get so many positive emails and testimonials about Stack Overflow. I can&rsquo;t take credit for that. But you can.</p>\r\n\r\n<p>I learned the collective power of my fellow programmers long ago writing on Coding Horror. The community is far, far smarter than I will ever be. All I can ask &mdash; all any of us can ask &mdash; is to help each other along the path.</p>\r\n\r\n<p>And if your fellow programmers decide to recognize you for that, then I say you&rsquo;ve well and truly earned it.</p>\r\n</blockquote>\r\n\r\n<p>The strength of Stack Overflow begins, and ends, with the&nbsp;<a href=\"https://meta.stackoverflow.com/\">community of programmers that power the site</a>. What should Stack Overflow be when it grows up?&nbsp;<strong>Whatever we make it, together.</strong></p>\r\n\r\n<p><img alt=\"stackoverflow-none-of-us-is-as-dumb-as-all-of-us\" src=\"https://blog.codinghorror.com/content/images/2018/10/stackoverflow-none-of-us-is-as-dumb-as-all-of-us.jpg\" /></p>\r\n'),
+(38, '<p>test</p>\r\n'),
+(39, '<p>test</p>\r\n'),
+(40, '<p>test</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -177,45 +199,49 @@ CREATE TABLE `content` (
   `content_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `marked` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `content`
 --
 
-INSERT INTO `content` (`content_id`, `user_id`, `title`, `date`) VALUES
-(1, 18, 'We Might Soon Build AI Who Deserve Rights', '2019-11-18'),
-(2, 18, 'Who Cares about Happiness?', '2019-11-18'),
-(3, 18, 'Cat Stevens - The wind', '2019-11-18'),
-(4, 18, 'I\'m Morally Good Enough Already, Thanks!', '2019-11-18'),
-(5, 18, 'Sunflower', '2019-11-19'),
-(6, 18, 'minions', '2019-11-19'),
-(7, 18, 'Dark Sky', '2019-11-19'),
-(8, 18, ' Naruto vs Sasuke Full Fight', '2019-11-19'),
-(9, 18, 'What are some of the best ways to learn programming?', '2019-11-19'),
-(10, 18, 'What are some of the best ways to learn programming?', '2019-11-19'),
-(11, 18, 'Trees', '2019-11-20'),
-(12, 24, 'What are some of the best ways to learn programming?', '2019-11-20'),
-(13, 24, 'What Makes for a Good Philosophical Argument, and The Common Ground Problem for Animal Consciousness', '2019-11-20'),
-(14, 25, 'Starry night', '2019-11-20'),
-(15, 26, 'How Mengzi Came up with Something Better Than the Golden Rule', '2019-11-20'),
-(16, 26, 'Hokages', '2019-11-20'),
-(17, 18, 'Naruto vs Pain Full fight', '2019-11-21'),
-(19, 18, 'Fascism', '2019-12-31'),
-(20, 18, 'Overestimating human responsibility', '2019-12-31'),
-(21, 18, 'Libra: Facebucks', '2019-12-31'),
-(22, 18, 'Data Driven', '2020-01-01'),
-(23, 18, 'The Trolling Test', '2020-01-01'),
-(24, 18, 'CAT STEVENS - Wild World', '2020-01-01'),
-(25, 18, 'Nirvana - Smells Like Teen Spirit', '2020-01-01'),
-(26, 18, 'Bridge', '2020-01-01'),
-(32, 18, 'Stack Overflow is designed for practicing programmers', '2020-01-09'),
-(33, 18, 'Horror Joker', '2020-01-09'),
-(34, 18, 'Naruto vs Third Raikage', '2020-01-09'),
-(35, 18, 'Naruto vs Third Raikage', '2020-01-09'),
-(36, 18, 'Naruto vs Third Raikage', '2020-01-09'),
-(37, 18, ' What is the best question and answer platform? Why?', '2020-01-09');
+INSERT INTO `content` (`content_id`, `user_id`, `title`, `date`, `marked`) VALUES
+(1, 18, 'We Might Soon Build AI Who Deserve Rights', '2019-11-18', 0),
+(2, 18, 'Who Cares about Happiness?', '2019-11-18', 0),
+(3, 18, 'Cat Stevens - The wind', '2019-11-18', 0),
+(4, 18, 'I\'m Morally Good Enough Already, Thanks!', '2019-11-18', 0),
+(5, 18, 'Sunflower', '2019-11-19', 0),
+(6, 18, 'minions', '2019-11-19', 0),
+(7, 18, 'Dark Sky', '2019-11-19', 0),
+(8, 18, ' Naruto vs Sasuke Full Fight', '2019-11-19', 0),
+(9, 18, 'What are some of the best ways to learn programming?', '2019-11-19', 0),
+(10, 18, 'What are some of the best ways to learn programming?', '2019-11-19', 0),
+(11, 18, 'Trees', '2019-11-20', 0),
+(12, 24, 'What are some of the best ways to learn programming?', '2019-11-20', 0),
+(13, 24, 'What Makes for a Good Philosophical Argument, and The Common Ground Problem for Animal Consciousness', '2019-11-20', 0),
+(14, 25, 'Starry night', '2019-11-20', 0),
+(15, 26, 'How Mengzi Came up with Something Better Than the Golden Rule', '2019-11-20', 0),
+(16, 26, 'Hokages', '2019-11-20', 0),
+(17, 18, 'Naruto vs Pain Full fight', '2019-11-21', 0),
+(19, 18, 'Fascism', '2019-12-31', 0),
+(20, 18, 'Overestimating human responsibility', '2019-12-31', 0),
+(21, 18, 'Libra: Facebucks', '2019-12-31', 0),
+(22, 18, 'Data Driven', '2020-01-01', 0),
+(23, 18, 'The Trolling Test', '2020-01-01', 0),
+(24, 18, 'CAT STEVENS - Wild World', '2020-01-01', 0),
+(25, 18, 'Nirvana - Smells Like Teen Spirit', '2020-01-01', 0),
+(26, 18, 'Bridge', '2020-01-01', 0),
+(32, 18, 'Stack Overflow is designed for practicing programmers', '2020-01-09', 0),
+(33, 18, 'Horror Joker', '2020-01-09', 0),
+(34, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
+(35, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
+(36, 18, 'Naruto vs Third Raikage', '2020-01-09', 0),
+(37, 18, ' What is the best question and answer platform? Why?', '2020-01-09', 0),
+(38, 26, 'test', '2020-02-20', 1),
+(39, 26, 'test', '2020-02-20', 1),
+(40, 26, 'test', '2020-02-20', 1);
 
 -- --------------------------------------------------------
 
@@ -258,7 +284,6 @@ CREATE TABLE `follow` (
 INSERT INTO `follow` (`followed`, `follower`, `date_since`) VALUES
 (18, 24, '2019-12-24'),
 (18, 25, '2019-12-24'),
-(18, 26, '2019-12-24'),
 (24, 26, '2019-12-24'),
 (26, 18, '2019-12-24');
 
@@ -280,6 +305,7 @@ CREATE TABLE `friend` (
 --
 
 INSERT INTO `friend` (`requestee`, `requestor`, `date_since`, `pending`) VALUES
+(18, 26, '2020-02-19', 1),
 (26, 18, '2019-12-25', 0);
 
 -- --------------------------------------------------------
@@ -359,7 +385,11 @@ INSERT INTO `notification` (`notification_id`, `event_id`, `event_type`, `cause_
 (365, 812, 'like_article', 26, 'user', '2020-01-10 00:00:00', 18, 1),
 (366, 812, 'comment_article', 26, 'user', '2020-01-10 00:00:00', 18, 1),
 (367, 817, 'like_video', 18, 'user', '2020-01-10 00:00:00', 18, 1),
-(368, 824, 'like_video', 18, 'user', '2020-01-11 00:00:00', 18, 0);
+(368, 824, 'like_video', 18, 'user', '2020-01-11 00:00:00', 18, 0),
+(371, 0, 'friend', 26, 'user', '2020-02-19 00:00:00', 18, 0),
+(372, 38, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0),
+(373, 39, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0),
+(374, 40, 'posted_article', 26, 'user', '2020-02-20 00:00:00', 18, 0);
 
 -- --------------------------------------------------------
 
@@ -406,6 +436,37 @@ INSERT INTO `question` (`question_id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reported`
+--
+
+CREATE TABLE `reported` (
+  `report_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reported`
+--
+
+INSERT INTO `reported` (`report_id`, `user_id`) VALUES
+(2, 26),
+(11, 26),
+(13, 26),
+(15, 26),
+(19, 26),
+(21, 26),
+(22, 26),
+(26, 26),
+(32, 26),
+(33, 26),
+(36, 26),
+(38, 26),
+(39, 26),
+(40, 26);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `share`
 --
 
@@ -424,26 +485,27 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
-  `user_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_enabled` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `user_reg_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_enabled` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `profile_pic` varchar(255) NOT NULL,
   `f_name` varchar(50) NOT NULL,
   `l_name` varchar(50) NOT NULL,
   `self_description` varchar(255) NOT NULL,
   `DOB` date NOT NULL,
-  `education` varchar(255) NOT NULL
+  `education` varchar(255) NOT NULL,
+  `cover_pic` varchar(255) NOT NULL DEFAULT 'uploads/picture/photo-1568489601916-b6dd81cbc0be.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_name`, `user_password`, `user_reg_time`, `user_enabled`, `profile_pic`, `f_name`, `l_name`, `self_description`, `DOB`, `education`) VALUES
-(18, 'TheGreatDamien', '$2y$10$5/2ExnFQz2.vtRUHbRlkqepaSbCvjVSoJePa0qdX0ll5gEQ4EK/16', '2019-11-18 16:47:39', 1, 'uploads/picture/5dd2cb2b04018.jpg', 'Damien', 'Gerard', 'I am awesome', '1998-10-09', 'University of Mauritius'),
-(23, 'JohnnyJohn', '$2y$10$2mua56OTEfAcKs3.sHLq1uWJpa6qMmtXUVP8AWvIhINUtn0BcDuoe', '2019-11-20 04:12:41', 1, 'uploads/picture/5dd4bd3903c20.', 'John', 'Doe', 'I\'m cool', '1984-06-06', 'University of Nowhere'),
-(24, 'PersonaUno', '$2y$10$StuuEDQoi36KXSP7xZQ9Q.3krOhxPk2LrpPTRNWEl3qpHjjVc.xRK', '2019-11-20 04:17:14', 1, 'uploads/picture/5dd4be4a46332.jpg', 'Paul', 'Leon', 'I am a test', '1992-06-10', 'none'),
-(25, 'PersonaDos', '$2y$10$gsv4dbkP4Bs5Nic4pIwAxOL6vH24E7FT/4A3GhhezOThjxmhr1fXO', '2019-11-20 04:43:55', 1, 'uploads/picture/5dd4c48bc3194.jpg', 'Charles', 'Muray', 'I am a killer', '1978-07-06', 'Murder academy'),
-(26, 'nicolasmelanie', '$2y$10$HuusNoXASqTRrGIudXq/NeNT.J/UANKxRTmjyZ1LeWX6rL5l6m/6e', '2019-11-20 09:09:57', 1, 'uploads/picture/5dd502e4e9f0c.jpg', 'Nioclas', 'Melanie', 'I am a 20 years old', '1999-02-17', 'Csy2 UOM');
+INSERT INTO `user` (`user_id`, `user_name`, `user_password`, `user_reg_time`, `user_enabled`, `profile_pic`, `f_name`, `l_name`, `self_description`, `DOB`, `education`, `cover_pic`) VALUES
+(18, 'TheGreatDamien', '$2y$10$5/2ExnFQz2.vtRUHbRlkqepaSbCvjVSoJePa0qdX0ll5gEQ4EK/16', '2019-11-18 16:47:39', 1, 'uploads/picture/5dd2cb2b04018.jpg', 'Damien', 'Gerard', 'I am a 21 years old', '1998-09-20', 'Computer Science Year 2', 'uploads/picture/5dd2cdd6bab76.jpg'),
+(23, 'JohnnyJohn', '$2y$10$2mua56OTEfAcKs3.sHLq1uWJpa6qMmtXUVP8AWvIhINUtn0BcDuoe', '2019-11-20 04:12:41', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
+(24, 'PersonaUno', '$2y$10$StuuEDQoi36KXSP7xZQ9Q.3krOhxPk2LrpPTRNWEl3qpHjjVc.xRK', '2019-11-20 04:17:14', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
+(25, 'PersonaDos', '$2y$10$gsv4dbkP4Bs5Nic4pIwAxOL6vH24E7FT/4A3GhhezOThjxmhr1fXO', '2019-11-20 04:43:55', 1, '', 'Nicoclas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', ''),
+(26, 'nicolasmelanie', '$2y$10$HuusNoXASqTRrGIudXq/NeNT.J/UANKxRTmjyZ1LeWX6rL5l6m/6e', '2019-11-20 09:09:57', 1, 'uploads/picture/worldhistory.jpeg', 'Nicolas', 'Melanie', 'I am a 21 years old', '1999-02-17', 'Computer Science Year 2', 'uploads/picture/5dd2cce27d0de.jpg');
 
 -- --------------------------------------------------------
 
@@ -461,21 +523,19 @@ CREATE TABLE `user_interest` (
 --
 
 INSERT INTO `user_interest` (`interest_id`, `user_id`) VALUES
-(1, 26),
 (2, 18),
 (3, 18),
 (5, 18),
 (12, 18),
 (4, 18),
-(14, 26),
 (5, 26),
-(2, 26),
-(3, 26),
 (4, 26),
 (12, 26),
 (15, 26),
 (1, 18),
-(14, 18);
+(14, 18),
+(1, 26),
+(14, 26);
 
 -- --------------------------------------------------------
 
@@ -531,10 +591,11 @@ INSERT INTO `view` (`view_id`, `date`, `user_id`, `content_id`) VALUES
 (812, '2020-01-10 09:26:03', 26, 4),
 (817, '2020-01-10 09:28:25', 18, 25),
 (819, '2020-01-11 13:57:02', 18, 32),
-(821, '2020-01-11 13:58:07', 26, 32),
+(821, '2020-02-19 20:57:34', 26, 32),
 (823, '2020-01-11 14:00:06', 26, 36),
 (824, '2020-01-11 14:30:59', 18, 24),
-(825, '2020-01-30 20:38:11', 18, 19);
+(825, '2020-01-30 20:38:11', 18, 19),
+(830, '2020-02-19 21:13:06', 26, 22);
 
 --
 -- Indexes for dumped tables
@@ -545,6 +606,13 @@ INSERT INTO `view` (`view_id`, `date`, `user_id`, `content_id`) VALUES
 --
 ALTER TABLE `account_sessions`
   ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD KEY `admin_name` (`admin_name`);
 
 --
 -- Indexes for table `answer`
@@ -654,6 +722,12 @@ ALTER TABLE `question`
   ADD PRIMARY KEY (`question_id`);
 
 --
+-- Indexes for table `reported`
+--
+ALTER TABLE `reported`
+  ADD PRIMARY KEY (`report_id`);
+
+--
 -- Indexes for table `share`
 --
 ALTER TABLE `share`
@@ -693,6 +767,12 @@ ALTER TABLE `view`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
@@ -702,7 +782,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `interest`
@@ -714,7 +794,7 @@ ALTER TABLE `interest`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=371;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -726,7 +806,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `view`
 --
 ALTER TABLE `view`
-  MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=829;
+  MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=831;
 
 --
 -- Constraints for dumped tables
@@ -829,6 +909,12 @@ ALTER TABLE `picture`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `Question_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `content` (`content_id`);
+
+--
+-- Constraints for table `reported`
+--
+ALTER TABLE `reported`
+  ADD CONSTRAINT `reported_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `content` (`content_id`);
 
 --
 -- Constraints for table `share`
