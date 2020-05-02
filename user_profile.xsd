@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+<xs:element name="f_name" type="xs:string"/>
+<xs:element name="l_name" type="xs:string"/>
+<xs:element name="self_description" type="xs:string"/>
+<xs:element name="DOB" type="xs:string"/>
+<xs:element name="education" type="xs:string"/>
+<xs:element name="profile_pic" type="xs:string"/>
+
+<xs:element name="user">
+    <xs:complexType>
+    <xs:sequence></xs:sequence>
+    <xs:element ref="f_name" />
+    <xs:element ref="l_name" />
+    <xs:element ref="self_description" />
+    <xs:element ref="DOB" />
+    <xs:element ref="education" />
+    <xs:element ref="profile_pic" />
+    </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="users">
+    <xs:complexType>
+        <xs:sequence>
+        <xs:element ref="user" maxOccurs="unbounded" />
+    </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

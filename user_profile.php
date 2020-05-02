@@ -34,7 +34,7 @@
 
         if($res->rowCount() > 0) {$isFollowed = true;}
 
-        $query = "SELECT friend.pending FROM webprojectdatabase.friend WHERE friend.requestee = :requestee AND friend.requestor = :requestor";
+        $query = "SELECT friend.pending FROM webprojectdatabase.friend WHERE (friend.requestee = :requestee AND friend.requestor = :requestor) OR (friend.requestor = :requestee AND friend.requestee = :requestor)";
         $values = array(':requestee'=>$thisId, ':requestor'=>$account->getId()); 
 
         try {
@@ -126,7 +126,7 @@
 
         <div class="main">
             <div id="reload-twPc-div"><div id="twPc-div" class="twPc-div" style="border: 1px solid black; width:95%;">
-                <div id="cover" class="twPc-bg twPc-block" ><img id="coverPic" src='<?php echo "$cover_pic";?>'></div>
+                <div id="cover" class="twPc-bg twPc-block"><img id="coverPic" src='<?php echo "$cover_pic";?>' style="width:100%"></div>
 
                 <div id="profile"><img id="profilePic" src='<?php echo "$profile_pic";?>' alt="" class="twPc-avatarImg" style="border: 3px solid black;"></div>
 
@@ -137,13 +137,23 @@
                     <span style="margin-left:30%;">
                     @<?php echo "$username";?>
                     </span>
+
+                    <?php if($thisId==$account->getId()){ ?>
+                    <button id="friendMain" class="<?php if($isFriend){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="location.href='friend_main.php';" <?php } ?> ><?php echo "Friends" ?></button>
+                    <?php } ?>
+
                     <?php if($thisId!=$account->getId()){ ?>
                     <button id="friendButton" class="<?php if($isFriend){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="processFriend()" <?php } ?> ><?php echo $friendButtonText ?></button>
-                    <?php }else{} ?>
+                    <?php }else{ ?>
+                    <button id="followerMain" class="relation-button" onclick="location.href='follower_main.php';">Followers</button>
+                    <?php } ?>
                         
                     <?php if($thisId!=$account->getId()){ ?>
                     <button id="followButton" class="<?php if($isFollowed){echo 'in-relation-button';}else{echo 'relation-button';} ?>" <?php if($login){?> onclick="processFollow()" <?php } ?>><?php if($isFollowed){echo 'Following';}else{echo 'Follow';} ?></button>
-                    <?php }else{} ?>
+                    <?php }else{ ?>
+                    <button id="followingMain" class="relation-button" onclick="location.href='following_main.php';" >Followings</button>
+                    <?php } ?>
+                    
                     <script>
                         function processFollow(){
                             $.post( "processFollow.php", { follower: "<?php echo $account->getId(); ?>", followed: "<?php echo $thisId; ?>" })

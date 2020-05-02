@@ -30,7 +30,25 @@ echo '<li><div class="generic-btn2"  ><a href="http://localhost:1234/webproject/
 echo '</ul>
 <hr>';
 if($login){
-    echo '<h4>FOLLOWINGS</h4>';
+    echo '<div class="interest-tab-content"><h4>FOLLOWINGS</h4>';
+    $followerings_data = json_decode(file_get_contents('http://localhost:1234/WebProject/processFollowings.php?id='.$id));
+
+    foreach($followerings_data as $following){
+        $followingfname = $following->f_name;
+    
+        $followinglname = $following->l_name;
+    
+        $followingPicture = $following->profile_pic;
+        $followingUsername = $following->user_name;
+        $followingSelfDescription = $following->self_description;
+        echo '<table class="generic-btn" width="100%">
+        <tr style="padding: 1px;">
+            <td rowspan="2" style="padding: 1px;">
+                <a class="anchor-list-item" href="interest.php?interest='.$followingUsername.'"><img class="circle" src="'.$followingPicture.'" height="50px"></a>
+            </td>
+            <td style="padding: 1px;" width="75%"><a class="anchor-list-item" href="interest.php?interest='.$followingUsername.'"><strong>'.$followingfname.' '.$followinglname.'</strong></a></td></table>';
+    }
+    echo '</div>';
 }
 
 echo '</div>';

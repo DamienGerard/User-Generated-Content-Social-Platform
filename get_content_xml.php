@@ -120,7 +120,6 @@
    
     $xml->appendChild($xml_contents);
     if($xml->schemaValidate('contents.xsd')){
-        $xml->save("test.xml");
         header( "content-type: application/xml" );
         echo  $xml->saveXML();
     }
